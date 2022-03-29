@@ -1,6 +1,6 @@
 	<html>
 	<head>
-		<title>WowNice! Contact Book</title>
+		<title>Events Finder</title>
 
 		<script type="text/javascript" src="javascript/doSignup.js"></script>
 		<script type="text/javascript" src="javascript/doLogin.js"></script>
@@ -45,17 +45,18 @@
 				<button type="reset" id="loginButton" onclick="doLogin();">Login</button>
 				 <span id="loginResult"></span>
 			 </form>
-			 <p style="font-size: 12px;" align="center">Don't have an account? <span id = "signuplink" style="font-size: 12px;"  onclick="document.getElementById('signup').style.display='block'">Click Here</span></p>
+			 <p style="font-size: 12px;" align="center">Create an Account:  <span id = "signuplink" style="font-size: 12px;"  onclick="document.getElementById('signup').style.display='block'">Student</span> or 
+				<span id = "signuplink" style="font-size: 12px;"  onclick="document.getElementById('signup2').style.display='block'">School</span></p>
 
 
 		</div>
 	</div>
 
 
-	<!--sign up box-->
+	<!--stdent sign up box-->
 	<div id="signup" class="modal">
 		<!--this is the close X in the corner-->
-		<form class="modal-content animate" action = "html/signupsuccess.html">
+		<form class="modal-content animate" action = "html/signupsuccessstudent.html">
 			<div class="imgcontainer">
 				<span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
 			</div>
@@ -63,19 +64,21 @@
 
 			<!--input fields and sign up button-->
 	    <div class="container">
-	      <h1>Sign Up</h1>
-	      <p>Please fill in this form to create an account.</p>
+	      <h1>Student Account Registration</h1>
+	      <p>Please fill in this form to create a student account.</p>
 	      <hr>
 
 
-				<label for="first"><b>First Name</b></label>
-	        <input type="text" id="firstName" placeholder="Enter First Name" name="first" required>
+			<label for="first"><b>Name</b></label>
+	        <input type="text" id="name" placeholder="Enter First Name" name="name" required>
 
-	      <label for="last"><b>Last Name</b></label>
-	        <input type="text" id="lastName" placeholder="Enter Last Name" name="last" required>
-
-	      <label for="user"><b>Username</b></label>
-	      <input type="text" id="signupUsername" placeholder="Enter Username" name="uname" required>
+	      <label for="school"><b>School</b></label>
+		  <select name="school" aira-placeholder="Select Your School"  id="school" class= "dropBox" required>
+			<option>Select Your School</option>
+		 </select>
+			
+	      <label for="user"><b>School Email</b></label>
+	      <input type="text" id="email" placeholder="Enter Username" name="email" required>
 
 	      <label for="psw"><b>Password</b></label>
 	      <input type="password" id="signupPassword" placeholder="Enter Password" name="psw" required>
@@ -112,14 +115,77 @@
 	  </form>
 	</div>
 
+	<!--stdent sign up box-->
+	<div id="signup2" class="modal">
+		<!--this is the close X in the corner-->
+		<form class="modal-content animate" action = "html/signupsuccessschool.html">
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('signup2').style.display='none'" class="close" title="Close Modal">&times;</span>
+			</div>
+
+
+			<!--input fields and sign up button-->
+	    <div class="container">
+	      <h1>University Account Registration</h1>
+	      <p>Please fill in this form to create a University account.</p>
+	      <hr>
+
+
+			<label for="schoolName"><b>School Name</b></label>
+	        <input type="text" id="schoolName" placeholder="Enter School Name" name="schoolName" required>
+
+			<label for="schoolDomain"><b>School Email Domain</b></label>
+	        <input type="text" id="schoolDomain" placeholder="Enter School Email Domain" name="schoolDomain" required>
+			
+	      <label for="user"><b>Username</b></label>
+	      <input type="text" id="signupUsername" placeholder="Enter Username" name="uname" required>
+
+	      <label for="psw"><b>Password</b></label>
+	      <input type="password" id="signupPassword" placeholder="Enter Password" name="psw" required>
+
+				<label for="psw-repeat"><b>Confirm Password</b></label>
+	      <input type="password" id="confirm_signupPassword" placeholder="Confirm Password"  onkeyup='checkPswds();' name="psw-repeat" required>
+
+
+	    	<input type="checkbox" onclick="pswdToggle2()">Show Passwords
+
+	       <!--these are the messages that pop up to validate the passwords-->
+
+				<div id="message">
+					<p><b>Recomended that your password contain the following:</b></p>
+					<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+					<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+					<p id="number" class="invalid">A <b>number</b></p>
+					<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+				</div>
+
+				<div id = "pswdmatch_message">
+				</div>
+
+				<button type="submit" id="signupButton" onclick="doSignup();" disabled>Sign Up</button>
+
+		    		<span id="signupResult"></span>
+			</div>
+
+
+				<!--close button-->
+			 <div class="container" style="background-color:#f1f1f1">
+				 <button type="button" onclick="document.getElementById('signup2').style.display='none'" class="cancelbtn">Cancel</button>
+			 </div>
+	  </form>
+	</div>
+
 	<script>
 	// Get the modal
 	var modal = document.getElementById('signup');
-
+	var modal2 = document.getElementById('signup2');
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 	    if (event.target == modal) {
 	        modal.style.display = "none";
+	    }
+		if (event.target == modal2) {
+	        modal2.style.display = "none";
 	    }
 	}
 
@@ -229,6 +295,18 @@
 	    length.classList.add("invalid");
 	  }
 	}
+    
+	// // populate school drop down - something like this might need to be added to the javascript for this page
+	// var select = document.getElementById("schoolName");
+	// var options = ["1", "2", "3", "4", "5"];
 
+	// for(var i = 0; i < options.length; i++) 
+	// {
+	// 	var opt = options[i];
+	// 	var el = document.createElement("option");
+	// 	el.textContent = opt;
+	// 	el.value = opt;
+	// 	select.appendChild(el);
+	// }
 	</script>
 	</body>
