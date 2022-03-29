@@ -1,0 +1,200 @@
+<html>
+	<head>
+		<title>Your Contact Book</title>
+		<script type="text/javascript" src="../javascript/doFunctions.js"></script>
+		<script type="text/javascript" src="../javascript/doLogout.js"></script>
+		<script type="text/javascript" src="../javascript/doCookie.js"></script>
+		<script src="https://kit.fontawesome.com/5dfef646bd.js" crossorigin="anonymous"></script>
+		<link rel="icon" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+		
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<style>
+
+	.box {
+		width: auto;
+		height: auto;
+	}
+
+	#editContactButton:hover{
+		opacity: .5;
+	}
+	#deleteContactButton:hover{
+		opacity: .5;
+	}
+	#searchContactButton:hover{
+		opacity: 1;
+	}
+	#searchContactIcon:hover{
+		opacity: .5;
+	}
+
+
+	</style>
+	<body>
+	<div class="box" style="margin: 35px 35px 35px 35px; padding-left: 100px;padding-right: 100px; padding-bottom: 50px; padding-top: 50px">
+		<h2>Your Contact Book</h2>
+		<div align ="center" id = "userName"></div><br>
+			<form style="display: inline;" >
+				<select name="searchType"  id="searchType" class= "dropBox" style="margin: 0; padding: 12px 20px 12px 20px; border: 2px solid #ccc; border-radius: 4px 0 0 4px; border-right: 0; width: auto;float:left;"required>
+					<option value="firstName">First Name</option>
+					<option value="lastName">Last Name</option>
+					<option value="address">Address</option>
+					<option value="city">City</option>
+					<option value="state">State</option>
+					<option value="zipcode">Zip Code</option>
+					<option value="phonenumber">Phone Number</option>
+					<option value="email">Email</option>
+				</select>
+				<input type="text" id="search" onkeyup="doSearch();" placeholder="Search..." style="margin: 0; padding: 12.5px 20px 13px 20px;border: 2px solid #ccc;border-radius: 0; border-right: 0;width:300px;background-color: white;float:left;" name="search" required/>
+				<button type="reset" id="searchContactButton" style="width:auto;margin: 0;padding: 13.5px 20px 13.5px 20px;float:left;border-radius: 0 4px 4px 0;border: 2px solid #ccc;border-left: 0;background-color:white" onclick="doSearch();"><span style="font-size: 16px;color:gray"><i id="searchContactIcon" class="fas fa-search"></i></span></button>
+			</form>
+			<button type = "button" onclick="openAdd();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;"><i class="fas fa-user-plus"></i></button>
+		 		<button onclick="doLogout()" style="width:auto; background-color:gray;margin:0 0 0 10px;padding: 16px 20px 16px 20px;float:right;	border-radius: 4 4px 4px 4; " ><i class="fas fa-sign-out-alt"></i>Logout</button>
+			<br><br><br>
+
+				<!--items displays here-->
+				<hr>
+				<p id="searchResult">Start a search to view your contacts!</p>
+				<div id="searchList"></div>
+		</div>
+
+
+	<!--add box-->
+	<div id="addContact" class="modal">
+			<!--this is the close X in the corner-->
+		<form class="modal-content animate">
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('addContact').style.display='none'" class="close" title="Close Modal">&times;</span>
+			</div>
+
+			 <!--input fields-->
+			<div class="container">
+				<h1>Add a Contact</h1>
+	      <hr>
+				<label for="fname"><b>First Name</b></label>
+				<input type="text" id="firstName" placeholder="Enter First Name" name="fname" required>
+
+				<label for="lname"><b>Last Name</b></label>
+				<input type="text" id="lastName" placeholder="Enter Last Name" name="lname" required>
+
+				<label for="address"><b>Address</b></label>
+				<input type="text" id="address" placeholder="Enter Address" name="adress">
+
+				<label for="city"><b>City</b></label>
+				<input type="text" id="city" placeholder="Enter City" name="city">
+
+				<label for="state"><b>State</b></label>
+				<input type="text" id="state" placeholder="Enter State" name="state">
+
+				<label for="zipcode"><b>Zip Code</b></label>
+				<input type="text" id="zipcode" placeholder="Enter Zip Code" name="zipcode">
+
+				<label for="phonenumber"><b>Phone Number</b></label>
+				<input type="text" id="phonenumber" placeholder="Enter Phone Number" name="phonenumber">
+
+				<label for="email"><b>Email</b></label>
+				<input type="text" id="email" placeholder="Enter Email" name="email">
+
+				<button type="reset" id="addContactButton" onclick="doAdd();">Add Contact</button>
+				<p align = "center" id = "addResult"></p>
+
+			</div>
+			 <!--close button-->
+			<div class="container" style="background-color:#f1f1f1">
+				<button type="button" onclick="document.getElementById('addContact').style.display='none'" class="cancelbtn">Cancel</button>
+			</div>
+		</form>
+	</div>
+
+	<!--edit box-->
+	<div id="editContact" class="modal">
+			<!--this is the close X in the corner-->
+		<form class="modal-content animate">
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('editContact').style.display='none'" class="close" title="Close Modal">&times;</span>
+			</div>
+
+			 <!--input fields-->
+			<div class="container">
+				<h1 >Edit Contact</h1>
+				<p id='editName'></p>
+	      <hr>
+				<select name="editType"  id="editType" class= "dropBox" style="margin: 0; padding: 12px 20px 12px 20px; border: 2px solid #ccc; border-radius: 4px 0 0 4px;border-right: 0; width: 30%;float:left;"required>
+					<option disabled selected value>Edit</option>
+					<option value="firstName">First Name</option>
+					<option value="lastName">Last Name</option>
+					<option value="address">Address</option>
+					<option value="city">City</option>
+					<option value="state">State</option>
+					<option value="zipcode">Zip Code</option>
+					<option value="phonenumber">Phone Number</option>
+					<option value="email">Email</option>
+				</select>
+				<input type="text" id="newinfo" placeholder="Edit..." style="margin: 0; padding: 13px 20px 12.5px 20px;border: 2px solid #ccc;border-radius: 0px 4px 4px 0px;  width: 70%;background-color: white;float:left;" name="search" required/>
+				<button type="reset" id="editButton">Edit</button>
+				<p align = "center" id = "editResult"></p>
+
+			</div>
+			 <!--close button-->
+			<div class="container" style="background-color:#f1f1f1">
+				<button type="button" onclick="document.getElementById('editContact').style.display='none'" class="cancelbtn">Cancel</button>
+			</div>
+		</form>
+	</div>
+
+	<!--delete box-->
+	<div id="deleteContact" class="modal">
+			<!--this is the close X in the corner-->
+		<form class="modal-content animate">
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('deleteContact').style.display='none'" class="close" title="Close Modal">&times;</span>
+			</div>
+
+			 <!--input fields-->
+			<div class="container">
+				<h1>Delete Contact</h1>
+				<p id="deleteName"></p>
+	      <hr>
+
+					<button onclick="document.getElementById('deleteContact').style.display='none'"  style="width:49.5%;background-color: red;">Cancel</button>
+					<button type="reset" id="deleteButton" style="width:49.5%">Delete</button>
+
+				<p align = "center" id = "deleteResult"></p>
+			</div>
+		</form>
+	</div>
+
+	<script>
+	// Read cookie with user info
+	document.addEventListener('DOMContentLoaded', function() {
+		readCookie();
+		}, false);
+
+
+	// Get the modal
+	var modal = document.getElementById('addContact');
+	var modal2 = document.getElementById('editContact');
+	var modal3 = document.getElementById('deleteContact');
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+		}
+		if (event.target == modal3) {
+			modal3.style.display = "none";
+		}
+	}
+
+	function openAdd(){
+		document.getElementById('addResult').innerHTML="";
+		document.getElementById('addContact').style.display='block'
+	}
+
+	</script>
+	</body>
