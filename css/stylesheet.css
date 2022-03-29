@@ -1,6 +1,6 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
-  background-image: url('../images/contactbook.jpg');
+  background-image: url('../images/background.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -55,7 +55,7 @@ input[type=text], input[type=password] {
 }
 /* Set a style for all buttons */
 button {
-  background-color: #d687b3;
+  background-color: #291b41;
   color: white;
   padding: 15px 20px;
   margin: 8px 0;
@@ -153,7 +153,7 @@ span.psw {
   height: 200px;
   width: 500px;
   position: relative;
-  border: 3px solid #d687b3;
+  border: 3px solid #291b41;
 	border-radius: 4px;
 }
 
