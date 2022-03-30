@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>University Events</title>
+		<script type="text/javascript" src="../javascript/doFunctions.js"></script>
+		<script type="text/javascript" src="../javascript/doLogout.js"></script>
+		<script type="text/javascript" src="../javascript/doCookie.js"></script>
+		<script src="https://kit.fontawesome.com/5dfef646bd.js" crossorigin="anonymous"></script>
+		<link rel="icon" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+		
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<style>
+
+	.box {
+		width: auto;
+		height: auto;
+	}
+
+	#editContactButton:hover{
+		opacity: .5;
+	}
+	#deleteContactButton:hover{
+		opacity: .5;
+	}
+	#searchContactButton:hover{
+		opacity: 1;
+	}
+	#searchContactIcon:hover{
+		opacity: .5;
+	}
+
+
+	</style>
+	<body>
+	<div class="box" style="margin: 35px 35px 35px 35px; padding-left: 100px;padding-right: 100px; padding-bottom: 50px; padding-top: 50px">
+		<h2>University Events</h2>
+		<div align ="center" id = "userName"></div><br>
+		 	
+			<button onclick="doLogout()" style="width:auto; background-color:gray;margin:0 0 0 10px;padding: 16px 20px 16px 20px;float:right;	border-radius: 4 4px 4px 4; " ><i class="fas fa-sign-out-alt"></i>Logout</button>
+			<br><br><br>
+
+				<!--items displays here-->
+				<hr>
+				<p id="searchResult">Click to approve or disapprove events!</p>
+				<div id="searchList"></div>
+		</div>
+
+
+	<script>
+	// Read cookie with user info
+	document.addEventListener('DOMContentLoaded', function() {
+		readCookie();
+		}, false);
+
+
+	
+
+	</script>
+	</body>
