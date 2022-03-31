@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Your Contact Book</title>
+		<title>University Events</title>
 		<script type="text/javascript" src="../javascript/doFunctions.js"></script>
 		<script type="text/javascript" src="../javascript/doLogout.js"></script>
 		<script type="text/javascript" src="../javascript/doCookie.js"></script>
@@ -34,24 +34,14 @@
 	</style>
 	<body>
 	<div class="box" style="margin: 35px 35px 35px 35px; padding-left: 100px;padding-right: 100px; padding-bottom: 50px; padding-top: 50px">
-		<h2>Your Contact Book</h2>
+		<h2>University Events</h2>
 		<div align ="center" id = "userName"></div><br>
-			<form style="display: inline;" >
-				<select name="searchType"  id="searchType" class= "dropBox" style="margin: 0; padding: 12px 20px 12px 20px; border: 2px solid #ccc; border-radius: 4px 0 0 4px; border-right: 0; width: auto;float:left;"required>
-					<option value="firstName">First Name</option>
-					<option value="lastName">Last Name</option>
-					<option value="address">Address</option>
-					<option value="city">City</option>
-					<option value="state">State</option>
-					<option value="zipcode">Zip Code</option>
-					<option value="phonenumber">Phone Number</option>
-					<option value="email">Email</option>
-				</select>
-				<input type="text" id="search" onkeyup="doSearch();" placeholder="Search..." style="margin: 0; padding: 12.5px 20px 13px 20px;border: 2px solid #ccc;border-radius: 0; border-right: 0;width:300px;background-color: white;float:left;" name="search" required/>
-				<button type="reset" id="searchContactButton" style="width:auto;margin: 0;padding: 13.5px 20px 13.5px 20px;float:left;border-radius: 0 4px 4px 0;border: 2px solid #ccc;border-left: 0;background-color:white" onclick="doSearch();"><span style="font-size: 16px;color:gray"><i id="searchContactIcon" class="fas fa-search"></i></span></button>
-			</form>
-			<button type = "button" onclick="openAdd();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;"><i class="fas fa-user-plus"></i></button>
-		 		<button onclick="doLogout()" style="width:auto; background-color:gray;margin:0 0 0 10px;padding: 16px 20px 16px 20px;float:right;	border-radius: 4 4px 4px 4; " ><i class="fas fa-sign-out-alt"></i>Logout</button>
+			
+			<button type = "button" onclick="openJoin();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;">Join RSO</button>
+			<button type = "button" onclick="openAdd();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;">Create Event</button>
+			<button type = "button" onclick="openCreateRSO();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;">Create RSO</button>
+		 	
+			<button onclick="doLogout()" style="width:auto; background-color:gray;margin:0 0 0 10px;padding: 16px 20px 16px 20px;float:right;	border-radius: 4 4px 4px 4; " ><i class="fas fa-sign-out-alt"></i>Logout</button>
 			<br><br><br>
 
 				<!--items displays here-->
@@ -62,67 +52,63 @@
 
 
 	<!--add box-->
-	<div id="addContact" class="modal">
+	<div id="addEvent" class="modal">
 			<!--this is the close X in the corner-->
 		<form class="modal-content animate">
 			<div class="imgcontainer">
-				<span onclick="document.getElementById('addContact').style.display='none'" class="close" title="Close Modal">&times;</span>
+				<span onclick="document.getElementById('addEvent').style.display='none'" class="close" title="Close Modal">&times;</span>
 			</div>
 
 			 <!--input fields-->
 			<div class="container">
-				<h1>Add a Contact</h1>
+				<h1>Create an Event</h1>
 	      <hr>
-				<label for="fname"><b>First Name</b></label>
-				<input type="text" id="firstName" placeholder="Enter First Name" name="fname" required>
+				<label><b>Title</b></label>
+				<input type="text" id="title" placeholder="Enter Title" name="title" required>
 
-				<label for="lname"><b>Last Name</b></label>
-				<input type="text" id="lastName" placeholder="Enter Last Name" name="lname" required>
+				<label><b>Description</b></label>
+				<input type="text" id="lastName" placeholder="Enter Description" name="description" required>
 
-				<label for="address"><b>Address</b></label>
-				<input type="text" id="address" placeholder="Enter Address" name="adress">
+				<label><b>Location</b></label>
+				<input type="text" id="location" placeholder="Enter Location" name="location">
 
-				<label for="city"><b>City</b></label>
-				<input type="text" id="city" placeholder="Enter City" name="city">
+				<label><b>Date/Time</b></label>
+				<input type="datetime-local" id="when" name="when">
 
-				<label for="state"><b>State</b></label>
-				<input type="text" id="state" placeholder="Enter State" name="state">
+				<label><b>Category</b></label>
+				<select name="type"  id="type" class= "dropBox" required>
+					<option disabled selected value>Select Category</option>
+					<option value="public">Public</option>
+					<option value="private">Private</option>
+					<option value="RSO">RSO Only</option>
+				</select>
 
-				<label for="zipcode"><b>Zip Code</b></label>
-				<input type="text" id="zipcode" placeholder="Enter Zip Code" name="zipcode">
-
-				<label for="phonenumber"><b>Phone Number</b></label>
-				<input type="text" id="phonenumber" placeholder="Enter Phone Number" name="phonenumber">
-
-				<label for="email"><b>Email</b></label>
-				<input type="text" id="email" placeholder="Enter Email" name="email">
-
-				<button type="reset" id="addContactButton" onclick="doAdd();">Add Contact</button>
+				<button type="reset" id="addEventButton" onclick="doAdd();">Add Event</button>
 				<p align = "center" id = "addResult"></p>
 
 			</div>
 			 <!--close button-->
 			<div class="container" style="background-color:#f1f1f1">
-				<button type="button" onclick="document.getElementById('addContact').style.display='none'" class="cancelbtn">Cancel</button>
+				<button type="button" onclick="document.getElementById('addEvent').style.display='none'" class="cancelbtn">Cancel</button>
 			</div>
 		</form>
 	</div>
 
-	<!--edit box-->
-	<div id="editContact" class="modal">
+	<!--join box-->
+	<div id="joinRSO" class="modal">
 			<!--this is the close X in the corner-->
 		<form class="modal-content animate">
 			<div class="imgcontainer">
-				<span onclick="document.getElementById('editContact').style.display='none'" class="close" title="Close Modal">&times;</span>
+				<span onclick="document.getElementById('joinRSO').style.display='none'" class="close" title="Close Modal">&times;</span>
 			</div>
 
 			 <!--input fields-->
 			<div class="container">
-				<h1 >Edit Contact</h1>
+				<h1 >Join RSO</h1>
 				<p id='editName'></p>
 	      <hr>
-				<select name="editType"  id="editType" class= "dropBox" style="margin: 0; padding: 12px 20px 12px 20px; border: 2px solid #ccc; border-radius: 4px 0 0 4px;border-right: 0; width: 30%;float:left;"required>
-					<option disabled selected value>Edit</option>
+				<select name="RSO"  id="RSO" class= "dropBox" required>
+					<option disabled selected value>Select RSO</option>
 					<option value="firstName">First Name</option>
 					<option value="lastName">Last Name</option>
 					<option value="address">Address</option>
@@ -132,39 +118,44 @@
 					<option value="phonenumber">Phone Number</option>
 					<option value="email">Email</option>
 				</select>
-				<input type="text" id="newinfo" placeholder="Edit..." style="margin: 0; padding: 13px 20px 12.5px 20px;border: 2px solid #ccc;border-radius: 0px 4px 4px 0px;  width: 70%;background-color: white;float:left;" name="search" required/>
-				<button type="reset" id="editButton">Edit</button>
-				<p align = "center" id = "editResult"></p>
+				<p align = "center" id = "joinResult"></p>
+				<button type="reset" id="joinButton" onclick="doJoin()">Join</button>
 
 			</div>
 			 <!--close button-->
 			<div class="container" style="background-color:#f1f1f1">
-				<button type="button" onclick="document.getElementById('editContact').style.display='none'" class="cancelbtn">Cancel</button>
+				<button type="button" onclick="document.getElementById('joinRSO').style.display='none'" class="cancelbtn">Cancel</button>
 			</div>
 		</form>
 	</div>
 
-	<!--delete box-->
-	<div id="deleteContact" class="modal">
-			<!--this is the close X in the corner-->
-		<form class="modal-content animate">
-			<div class="imgcontainer">
-				<span onclick="document.getElementById('deleteContact').style.display='none'" class="close" title="Close Modal">&times;</span>
-			</div>
+	<!--create RSO box-->
+	<div id="createRSO" class="modal">
+		<!--this is the close X in the corner-->
+	<form class="modal-content animate">
+		<div class="imgcontainer">
+			<span onclick="document.getElementById('createRSO').style.display='none'" class="close" title="Close Modal">&times;</span>
+		</div>
 
-			 <!--input fields-->
-			<div class="container">
-				<h1>Delete Contact</h1>
-				<p id="deleteName"></p>
-	      <hr>
+		 <!--input fields-->
+		<div class="container">
+			<h1>Create an RSO</h1>
+			<p>You can only create one RSO. Once you create an RSO you become the manager of the RSO.</p>
+	 	 <hr>
+			<label><b>Name</b></label>
+			<input type="text" id="RSOName" placeholder="Enter Name" name="RSOName" required>
 
-					<button onclick="document.getElementById('deleteContact').style.display='none'"  style="width:49.5%;background-color: red;">Cancel</button>
-					<button type="reset" id="deleteButton" style="width:49.5%">Delete</button>
 
-				<p align = "center" id = "deleteResult"></p>
-			</div>
-		</form>
-	</div>
+			<button type="reset" id="createRSOButton" onclick="doCreateRSO();">Create RSO</button>
+			<p align = "center" id = "createRSOResult"></p>
+
+		</div>
+		 <!--close button-->
+		<div class="container" style="background-color:#f1f1f1">
+			<button type="button" onclick="document.getElementById('createRSO').style.display='none'" class="cancelbtn">Cancel</button>
+		</div>
+	</form>
+</div>
 
 	<script>
 	// Read cookie with user info
@@ -174,8 +165,8 @@
 
 
 	// Get the modal
-	var modal = document.getElementById('addContact');
-	var modal2 = document.getElementById('editContact');
+	var modal = document.getElementById('addEvent');
+	var modal2 = document.getElementById('joinRSO');
 	var modal3 = document.getElementById('deleteContact');
 
 	// When the user clicks anywhere outside of the modal, close it
@@ -193,8 +184,18 @@
 
 	function openAdd(){
 		document.getElementById('addResult').innerHTML="";
-		document.getElementById('addContact').style.display='block'
+		document.getElementById('addEvent').style.display='block'
 	}
+	function openJoin(){
+		document.getElementById('joinResult').innerHTML="";
+		document.getElementById('joinRSO').style.display='block'
+	}
+	function openCreateRSO(){
+		document.getElementById('createRSOResult').innerHTML="";
+		document.getElementById('createRSO').style.display='block'
+	}
+
+	
 
 	</script>
 	</body>
