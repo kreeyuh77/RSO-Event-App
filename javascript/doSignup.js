@@ -92,7 +92,8 @@ function popSchoolDropdown(array)
 	var select = document.getElementById("school"); 
 	var options = array; 
 
-	for(var i = 0; i < options.length; i++) {
+	for(var i = 0; i < options.length; i++) 
+	{
 		var opt = options[i];
 
 		var el = document.createElement("option");
@@ -100,7 +101,7 @@ function popSchoolDropdown(array)
 		el.value = opt;
 
 		select.add(el);
-	}​
+	}
 }
 
 
