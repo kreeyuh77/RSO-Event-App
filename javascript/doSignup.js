@@ -25,9 +25,16 @@ function doSchoolSearch()
 {
 	// for testing purposes - delete later
 	
-	const jsonData = require('./testschool.json'); 
-	console.log(jsonData);
-	var mydata = JSON.parse(jsonData);
+	fetch('./testschool.json')
+	.then(response => {
+	   return response.json();
+	})
+	.then(jsondata => console.log(jsondata));
+	
+	// console.log(jsonData);
+	// var mydata = JSON.parse(jsonData);
+	
+	// end test
 	
 	var jsonPayload = '';
 	var isearch = "domain";
@@ -48,7 +55,9 @@ function doSchoolSearch()
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				var jsonObject = JSON.parse(xhr.responseText);
+				//var jsonObject = JSON.parse(xhr.responseText);
+				var jsonObject = JSON.parse(jsondata);
+				
 				console.log("This is the result: " + JSON.stringify(jsonObject));
 
 				if (jsonObject.error == "")
