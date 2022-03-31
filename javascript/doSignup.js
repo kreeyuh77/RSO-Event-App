@@ -21,9 +21,15 @@ function doSignup()
 
 
 // Searching for Domains that exist in the database
-function doDomainSearch()
+function doSchoolSearch()
 {
-	var jsonPayload = '':
+	// for testing purposes - delete later
+	
+	const jsonData = require('./testschool.json'); 
+	console.log(jsonData);
+	var mydata = JSON.parse(jsonData);
+	
+	var jsonPayload = '';
 	var isearch = "domain";
 	
 	var url = '../api/SearchContact.php';
@@ -67,9 +73,9 @@ function doDomainSearch()
 
 				for (var i = 0; i < jsonObject.results.length; i++)
 				{
-				  array[i] = jsonObject.result[i].domain
+				  array[i] = jsonObject.result[i].school
 				}
-				createTable(array);
+				popSchoolDropdown(array);
 			}
 		};
 	}
@@ -81,7 +87,26 @@ function doDomainSearch()
 }
 
 
-// code utalizing
+function popSchoolDropdown(array)
+{
+	var select = document.getElementById("school"); 
+	var options = array; 
+
+	for(var i = 0; i < options.length; i++) {
+		var opt = options[i];
+
+		var el = document.createElement("option");
+		el.text = opt;
+		el.value = opt;
+
+		select.add(el);
+	}​
+}
+
+
+
+
+// ------ Code Utalizing -------- Delete Later -------
 function doSearch()
 {
 	var jsonPayload = '';
@@ -158,68 +183,68 @@ function doSearch()
 				console.log("This is the result: " + JSON.stringify(jsonObject));
 
 				if (jsonObject.error == "")
-			  {
-			  	document.getElementById("searchResult").innerHTML = "Contact(s) have been retrieved";
-			  }
-			  else
-			  {
-			  	document.getElementById("searchResult").innerHTML = jsonObject.error;
-				  document.getElementById("searchList").innerHTML = "";
-				  return;
-			  }
+					{
+						document.getElementById("searchResult").innerHTML = "Contact(s) have been retrieved";
+					}
+					else
+					{	
+						document.getElementById("searchResult").innerHTML = jsonObject.error;
+						document.getElementById("searchList").innerHTML = "";
+						return;
+					}
 			  
-       	array = new Array(jsonObject.results.length);
+				array = new Array(jsonObject.results.length);
 
-       // array = localArray;
+			   // array = localArray;
 
-        for (var i = 0; i < array.length; i++)
-        {
-          array[i] = new Array(9);
-        }
+				for (var i = 0; i < array.length; i++)
+				{
+				  array[i] = new Array(9);
+				}
 
-        for (var i = 0; i < jsonObject.results.length; i++)
-        {
-          for (var j = 0; j < 9; j++)
-          {
-            if (j == 0)
-            {
-              array[i][j] = jsonObject.results[i].FirstName;
-            }
-            if (j == 1)
-            {
-              array[i][j] = jsonObject.results[i].LastName;
-            }
-            if (j == 2)
-            {
-              array[i][j] = jsonObject.results[i].StreetAddress;
-            }
-            if (j == 3)
-            {
-              array[i][j] = jsonObject.results[i].City;
-            }
-            if (j == 4)
-            {
-              array[i][j] = jsonObject.results[i].State;
-            }
-						if (j == 5)
-            {
-              array[i][j] = jsonObject.results[i].ZipCode;
-            }
-            if (j == 6)
-            {
-              array[i][j] = jsonObject.results[i].PhoneNumber;
-            }
-				    if (j == 7)
-            {
-              array[i][j] = jsonObject.results[i].Email;
-            }
-				    if (j == 8)
-				    {
-			        array[i][j] = jsonObject.results[i].ContactID;
-				    }
-          }
-        }
-        createTable(array);
+				for (var i = 0; i < jsonObject.results.length; i++)
+				{
+				  for (var j = 0; j < 9; j++)
+				  {
+					if (j == 0)
+					{
+					  array[i][j] = jsonObject.results[i].FirstName;
+					}
+					if (j == 1)
+					{
+					  array[i][j] = jsonObject.results[i].LastName;
+					}
+					if (j == 2)
+					{
+					  array[i][j] = jsonObject.results[i].StreetAddress;
+					}
+					if (j == 3)
+					{
+					  array[i][j] = jsonObject.results[i].City;
+					}
+					if (j == 4)
+					{
+					  array[i][j] = jsonObject.results[i].State;
+					}
+								if (j == 5)
+					{
+					  array[i][j] = jsonObject.results[i].ZipCode;
+					}
+					if (j == 6)
+					{
+					  array[i][j] = jsonObject.results[i].PhoneNumber;
+					}
+							if (j == 7)
+					{
+					  array[i][j] = jsonObject.results[i].Email;
+					}
+					if (j == 8)
+					{
+						array[i][j] = jsonObject.results[i].ContactID;
+					}
+				  }
+				}
+				createTable(array);
 			}
 		};
   }
