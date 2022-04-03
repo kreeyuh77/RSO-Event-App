@@ -26,8 +26,8 @@
             returnWithError("Email already exists");
         }
         else {
-            $stmt = $conn->prepare("INSERT INTO Student (Name, Student_Email, Password) VALUES (?, ? ,?)");
-            $stmt->bind_param($name, $school, $email, $password);
+            $stmt = $conn->prepare("INSERT INTO Student (Name, School, Student_Email, Password) VALUES (?, ?, ? ,?)");
+            $stmt->bind_param("ssss",$name, $school, $email, $password);
             $stmt->execute();
             $stmt->close();
             $conn->close();
