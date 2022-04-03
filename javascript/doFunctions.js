@@ -96,7 +96,7 @@ function updateTable(searchAtt, searchText)
 
 			if (jsonObject.error == "")
   		{
- 	  		document.getElementById("searchResult").innerHTML = "Contact(s) have been retrieved";
+ 	  		document.getElementById("searchResult").innerHTML = "Event(s) have been retrieved";
    		}
    	 	else
    	 	{
@@ -211,7 +211,7 @@ function doSearch()
 
 				if (jsonObject.error == "")
 				{
-					document.getElementById("searchResult").innerHTML = "Contact(s) have been retrieved";
+					document.getElementById("searchResult").innerHTML = "Event(s) have been retrieved";
 				}
 				else
 				{
@@ -264,6 +264,8 @@ function doSearch()
 }
 
 
+/// **************** 'when' will change to date and time ****************
+
 function createTable(array)
 {
 	//var table = document.createElement('table');
@@ -298,7 +300,7 @@ function doDelete(i)
 	var lname = array[i][1];
 	document.getElementById('deleteContact').style.display='block';
 	document.getElementById("deleteResult").innerHTML = "";
-	document.getElementById("deleteName").innerHTML = "Are you sure you want to remove " + fname + " " + lname + " from your contact book?";
+	document.getElementById("deleteName").innerHTML = "Are you sure you want to remove " + fname + " " + lname + " from your event list?";
 	document.getElementById("deleteButton").addEventListener("click", function() {
 		var jsonPayload = '{"ContactID" : "' + contactID + '"}';
 		//Need to edit the url based on the php files given to us
@@ -455,21 +457,18 @@ function doEdit(i){
 }
 
 
-// ***** Need to Update for project ********
 function doAdd()
 {
-	var firstName = document.getElementById("firstName").value;
-	var lastName = document.getElementById("lastName").value;
-	var address = document.getElementById("address").value;
-	var city = document.getElementById("city").value;
+	var title = document.getElementById("title").value;
+	var description = document.getElementById("description").value;
+	var location = document.getElementById("location").value;
+	var when = document.getElementById("when").value;
 	var state = document.getElementById("state").value;
-	var zipcode = document.getElementById("zipcode").value;
-	var phonenumber = document.getElementById("phonenumber").value;
-	var email = document.getElementById("email").value;
+	var type = document.getElementById("type").value;
 	document.getElementById("addResult").innerHTML = "";
 	
-	var jsonPayload = '{"ID" : "' + userId + '","FirstName" : "' + firstName + '", "LastName" : "' + lastName + '", "StreetAddress" : "' + address + '", "City" : "' + city + '", "State" : "' + state + '", "ZipCode" : "' + zipcode + '", "PhoneNumber" : "' + phonenumber + '", "Email" : "' + email + '"}';
-	var url = '../api/AddContact.php';
+	var jsonPayload = '{"ID" : "' + userId + '","title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + '"}';
+	var url = '../api/AddEvent.php';
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -479,7 +478,7 @@ function doAdd()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("addResult").innerHTML = firstName + " " + lastName +  " has been added!";
+				document.getElementById("addResult").innerHTML = title + " " +  " has been added!";
 				updateTable(att, text);
 				
 			} 			
