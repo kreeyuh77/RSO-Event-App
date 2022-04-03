@@ -3,12 +3,12 @@
 	// var lastName = "";
 	
 
-	function saveCookie( checkBoxValue )
+	function saveCookie( schoolbool )
 	{
 		var minutes = 20;
 		var date = new Date();
 		date.setTime(date.getTime()+(minutes*60*1000));
-		if( checkBoxValue == true )
+		if( schoolbool == true )
 		{
 			//document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 			document.cookie = ",userId=" + userId + ";expires=" + date.toGMTString();
@@ -25,7 +25,7 @@
 
 		var login = document.getElementById("loginName").value;
 		var password = document.getElementById("loginPassword").value;
-		var checkBoxValue = document.getElementById("checkBoxValue").check;
+		var schoolbool = document.getElementById("schoolbool").check;
 		
 		
 		var hash = md5( password );
@@ -34,7 +34,7 @@
 		// Need to edit the url based on the php files given to us
 		// true = school login
 		// false = student login
-		let url = (checkBoxValue == true) ? '/api/LoginSchoolAPI.php' : '/api/LoginAPI.php';
+		let url = (schoolbool == true) ? '/api/LoginSchoolAPI.php' : '/api/LoginAPI.php';
 		
 		xhr.open("POST", url, false);
 		xhr.setRequestHeader("Content-Type", "application/json");
@@ -47,7 +47,7 @@
 		// userId = jsonObject.ID;
 		// firstName = jsonObject.FirstName;
 		// lastName = jsonObject.LastName;
-		userId = (checkBoxValue == true) ? jsonObject.schoolName : jsonObject.Name;
+		userId = (schoolbool == true) ? jsonObject.schoolName : jsonObject.Name;
 		
 		if (userId < 1 || jsonObject.error != "")
 		{
@@ -56,7 +56,15 @@
 		}
 		else
 		{
-			saveCookie(checkBoxValue);
-			location.assign("https://wownice.club/html/main.html");
+			saveCookie(schoolbool);
+			if(schoolbool == true)
+			{
+				location.assign("mainSchool.html");
+			}
+			else
+			{
+				location.assign("main.html");
+			}	
+			
 		}
 	}
