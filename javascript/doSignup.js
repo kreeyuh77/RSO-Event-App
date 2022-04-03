@@ -9,7 +9,7 @@ function doSignup()
 	var hash = md5( password );
 	let xhr = new XMLHttpRequest();
 //	Need to edit the url based on the php files given to us
-	let url = 'api/RegisterUser.php';
+	let url = 'api/RegisterStudent.php';
 
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-Type", "application/json");
@@ -23,6 +23,7 @@ function doSchoolSignup()
 
 	var schoolName = document.getElementById("schoolName").value;
 	var signupSchoolUsername = document.getElementById("signupSchoolUsername").value;
+	//var signupSchoolUsername = "Test";
 	var password = document.getElementById("signupSchoolPassword").value;
 	var hash = md5( password );
 	let xhr = new XMLHttpRequest();
@@ -34,6 +35,7 @@ function doSchoolSignup()
 	var jsonPayload = '{"schoolName" : "' + schoolName + '", "signupSchoolUsername" : "' + signupSchoolUsername + '", "signupSchoolPassword" : "' + hash + '"}';
 	console.log(jsonPayload);
 	xhr.send(jsonPayload);	
+	console.log(xhr.responseText);
 	
 }
 

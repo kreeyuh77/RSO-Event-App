@@ -20,12 +20,13 @@
 		let xhr = new XMLHttpRequest();
 
 		//Need to edit the url based on the php files given to us
-		let url = 'api/LoginApi.php';
+		let url = '/api/LoginAPI.php';
 		xhr.open("POST", url, false);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		//var jsonPayload = JSON.stringify({"FirstName" : firstName, "LastName" : lastName, "Login" : login, "Password" : hash});
 		var jsonPayload = '{"Login" : "' + login + '", "Password" : "' + hash + '"}';
 		xhr.send(jsonPayload);
+		console.log(xhr.responseText);
 
 	  var jsonObject = JSON.parse( xhr.responseText );
 		userId = jsonObject.ID;

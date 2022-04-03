@@ -4,9 +4,9 @@
 
     $inData = getRequestInfo();
 
-    $ID = 0;
-    $FirstName = "";
-    $LastName = "";
+    // $ID = 0;
+    // $FirstName = "";
+    // $LastName = "";
 
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if ($conn->connect_error){
@@ -16,19 +16,19 @@
         $stmt->bind_param("ss", $inData["Login"], $inData["Password"]);
         $stmt->execute();
         $result = $stmt->get_result();
-
+        
         if($row = $result->fetch_assoc()){
-            returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
+            returnWithInfo($row['Name'], $row['StudentID']);
         } else {
-            returnWithError("No Records Found");
+            returnWithError($inData["Password"]);
         }
 
         $stmt->close();
         $conn->close();
     }
 
-    function returnWithInfo($FirstName, $LastName, $ID){
-        $retValue = '{"ID":' . $ID . ',"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","error":""}';
+    function returnWithInfo($Name, $ID){
+        $retValue = '{"ID":' . $ID . ',"Name":"' . $Name . '","error":""}';
         sendResultInfoAsJson($retValue);
     }
 ?>
