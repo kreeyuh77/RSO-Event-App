@@ -22,9 +22,9 @@ function doSchoolSignup()
 {
 
 	var schoolName = document.getElementById("schoolName").value;
-	var schoolDomain = document.getElementById("schoolDomain").value;
-	var signupUsername = document.getElementById("signupUsername").value;
-	var password = document.getElementById("signupPassword").value;
+	// var schoolDomain = document.getElementById("schoolDomain").value;
+	var signupSchoolUsername = document.getElementById("signupSchoolUsername").value;
+	var password = document.getElementById("signupSchoolPassword").value;
 	var hash = md5( password );
 	let xhr = new XMLHttpRequest();
 //	Need to edit the url based on the php files given to us
@@ -32,7 +32,7 @@ function doSchoolSignup()
 
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-Type", "application/json");
-	var jsonPayload = '{"schoolName" : "' + schoolName + '", "schoolDomain" : "' + schoolDomain + '", "schoolEmail" : "' + signupUsername + '", "Password" : "' + hash + '"}';
+	var jsonPayload = '{"schoolName" : "' + schoolName + '", "signupSchoolUsername" : "' + signupSchoolUsername + '", "signupSchoolPassword" : "' + hash + '"}';
 	xhr.send(jsonPayload);	
 	
 }
