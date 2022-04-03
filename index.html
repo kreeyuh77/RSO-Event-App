@@ -91,13 +91,13 @@
 
 	       <!--these are the messages that pop up to validate the passwords-->
 
-				<div id="message">
+				<!-- <div id="message">
 					<p><b>Recomended that your password contain the following:</b></p>
 					<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
 					<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
 					<p id="number" class="invalid">A <b>number</b></p>
 					<p id="length" class="invalid">Minimum <b>8 characters</b></p>
-				</div>
+				</div> -->
 
 				<div id = "pswdmatch_message">
 				</div>
@@ -142,25 +142,25 @@
 	      <input type="password" id="signupSchoolPassword" placeholder="Enter Password" name="psw" required>
 
 				<label for="psw-repeat"><b>Confirm Password</b></label>
-	      <input type="password" id="confirm_signupSchoolPassword" placeholder="Confirm Password"  onkeyup='checkPswds();' name="psw-repeat" required>
+	      <input type="password" id="confirm_signupSchoolPassword" placeholder="Confirm Password"  onkeyup='checkPswds2();' name="psw-repeat" required>
 
 
-	    	<input type="checkbox" onclick="pswdToggle2()">Show Passwords
+	    	<input type="checkbox" onclick="pswdToggle3()">Show Passwords
 
 	       <!--these are the messages that pop up to validate the passwords-->
 
-				<div id="message">
+				<!-- <div id="message">
 					<p><b>Recomended that your password contain the following:</b></p>
 					<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
 					<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
 					<p id="number" class="invalid">A <b>number</b></p>
 					<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+				</div> -->
+
+				<div id = "pswdmatch_message2">
 				</div>
 
-				<div id = "pswdmatch_message">
-				</div>
-
-				<button type="submit" id="signupButton2" onclick="doSchoolSignup();" disabled>Sign Up</button>
+				<button type="submit" id="signupButton2" onclick="doSchoolSignup(); console.log('did signuop')" disabled>Sign Up</button>
 
 		    		<span id="signupResult"></span>
 			</div>
@@ -215,6 +215,22 @@
 	  }
 	}
 
+	function pswdToggle3() {
+	  var x = document.getElementById("signupSchoolPassword");
+	  if (x.type === "password") {
+	    x.type = "text";
+	  } else {
+	    x.type = "password";
+	  }
+
+		var y = document.getElementById("confirm_signupSchoolPassword");
+	  if (y.type === "password") {
+	    y.type = "text";
+	  } else {
+	    y.type = "password";
+	  }
+	}
+
 
 	// this makes sure the paswords match when signing up
 	function checkPswds() {
@@ -230,69 +246,82 @@
 	  }
 	}
 
-
-	// this part is for the password validation
-	var myInput = document.getElementById("signupPassword");
-	var letter = document.getElementById("letter");
-	var capital = document.getElementById("capital");
-	var number = document.getElementById("number");
-	var length = document.getElementById("length");
-
-	// When the user clicks on the password field, show the message box
-	myInput.onfocus = function() {
-	  document.getElementById("message").style.display = "block";
-	}
-
-
-	// When the user clicks outside of the password field, hide the message box
-	myInput.onblur = function() {
-	  document.getElementById("message").style.display = "none";
-	}
-
-
-	// When the user starts to type something inside the password field
-	myInput.onkeyup = function() {
-	  // Validate lowercase letters
-	  var lowerCaseLetters = /[a-z]/g;
-	  if(myInput.value.match(lowerCaseLetters)) {
-	    letter.classList.remove("invalid");
-	    letter.classList.add("valid");
+	function checkPswds2() {
+	  if (document.getElementById('signupSchoolPassword').value ==
+	    document.getElementById('confirm_signupSchoolPassword').value) {
+	    document.getElementById('pswdmatch_message2').style.color = 'green';
+	    document.getElementById('pswdmatch_message2').innerHTML = 'Passwords match';
+	    document.getElementById('signupButton2').disabled = false;
 	  } else {
-	    letter.classList.remove("valid");
-	    letter.classList.add("invalid");
-	  }
-
-
-	  // Validate capital letters
-	  var upperCaseLetters = /[A-Z]/g;
-	  if(myInput.value.match(upperCaseLetters)) {
-	    capital.classList.remove("invalid");
-	    capital.classList.add("valid");
-	  } else {
-	    capital.classList.remove("valid");
-	    capital.classList.add("invalid");
-	  }
-
-
-	  // Validate numbers
-	  var numbers = /[0-9]/g;
-	  if(myInput.value.match(numbers)) {
-	    number.classList.remove("invalid");
-	    number.classList.add("valid");
-	  } else {
-	    number.classList.remove("valid");
-	    number.classList.add("invalid");
-	  }
-
-	  // Validate length
-	  if(myInput.value.length >= 8) {
-	    length.classList.remove("invalid");
-	    length.classList.add("valid");
-	  } else {
-	    length.classList.remove("valid");
-	    length.classList.add("invalid");
+	    document.getElementById('pswdmatch_message2').style.color = 'red';
+	    document.getElementById('pswdmatch_message2').innerHTML = 'Passwords do not match';
+	    document.getElementById('signupButton2').disabled = true;
 	  }
 	}
+
+
+	// // this part is for the password validation
+	// var myInput = document.getElementById("signupPassword");
+	// var letter = document.getElementById("letter");
+	// var capital = document.getElementById("capital");
+	// var number = document.getElementById("number");
+	// var length = document.getElementById("length");
+
+	// // When the user clicks on the password field, show the message box
+	// myInput.onfocus = function() {
+	//   document.getElementById("message").style.display = "block";
+	// }
+
+
+	// // When the user clicks outside of the password field, hide the message box
+	// myInput.onblur = function() {
+	//   document.getElementById("message").style.display = "none";
+	// }
+
+
+	// // When the user starts to type something inside the password field
+	// myInput.onkeyup = function() {
+	//   // Validate lowercase letters
+	//   var lowerCaseLetters = /[a-z]/g;
+	//   if(myInput.value.match(lowerCaseLetters)) {
+	//     letter.classList.remove("invalid");
+	//     letter.classList.add("valid");
+	//   } else {
+	//     letter.classList.remove("valid");
+	//     letter.classList.add("invalid");
+	//   }
+
+
+	//   // Validate capital letters
+	//   var upperCaseLetters = /[A-Z]/g;
+	//   if(myInput.value.match(upperCaseLetters)) {
+	//     capital.classList.remove("invalid");
+	//     capital.classList.add("valid");
+	//   } else {
+	//     capital.classList.remove("valid");
+	//     capital.classList.add("invalid");
+	//   }
+
+
+	//   // Validate numbers
+	//   var numbers = /[0-9]/g;
+	//   if(myInput.value.match(numbers)) {
+	//     number.classList.remove("invalid");
+	//     number.classList.add("valid");
+	//   } else {
+	//     number.classList.remove("valid");
+	//     number.classList.add("invalid");
+	//   }
+
+	//   // Validate length
+	//   if(myInput.value.length >= 8) {
+	//     length.classList.remove("invalid");
+	//     length.classList.add("valid");
+	//   } else {
+	//     length.classList.remove("valid");
+	//     length.classList.add("invalid");
+	//   }
+	// }
     
 	//doSchoolSearch();
 	
