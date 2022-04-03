@@ -22,7 +22,6 @@ function doSchoolSignup()
 {
 
 	var schoolName = document.getElementById("schoolName").value;
-	// var schoolDomain = document.getElementById("schoolDomain").value;
 	var signupSchoolUsername = document.getElementById("signupSchoolUsername").value;
 	var password = document.getElementById("signupSchoolPassword").value;
 	var hash = md5( password );
