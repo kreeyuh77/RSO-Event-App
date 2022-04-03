@@ -11,11 +11,11 @@
 		if( schoolbool == true )
 		{
 			//document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
-			document.cookie = ",userId=" + userId + ";expires=" + date.toGMTString();
+			document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
 		}
 		else
 		{
-			document.cookie = ",userId=" + userId + ";expires=" + date.toGMTString();
+			document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
 		}
 
 	}
