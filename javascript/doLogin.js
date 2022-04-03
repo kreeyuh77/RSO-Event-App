@@ -8,15 +8,7 @@
 		var minutes = 20;
 		var date = new Date();
 		date.setTime(date.getTime()+(minutes*60*1000));
-		if( schoolbool == true )
-		{
-			//document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
-			document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
-		}
-		else
-		{
-			document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
-		}
+		document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
 
 	}
 
@@ -44,10 +36,10 @@
 		console.log(xhr.responseText);
 
 		var jsonObject = JSON.parse( xhr.responseText );
-		// userId = jsonObject.ID;
+		 userId = jsonObject.ID;
 		// firstName = jsonObject.FirstName;
 		// lastName = jsonObject.LastName;
-		userId = (schoolbool == true) ? jsonObject.schoolName : jsonObject.Name;
+		//userId = (schoolbool == true) ? jsonObject.schoolName : jsonObject.Name;
 		
 		if (userId < 1 || jsonObject.error != "")
 		{
