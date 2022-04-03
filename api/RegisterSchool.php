@@ -5,9 +5,9 @@
     $inData = getRequestInfo();
 
     $schoolName = $inData["schoolName"];
-    $schoolDomain = $inData["schoolDomain"];
-    $signupUsername = $inData["signupUsername"];
-    $signupPassword = $inData["signupPassword"];
+    
+    $signupUsername = $inData["signupSchoolUsername"];
+    $signupPassword = $inData["signupSchoolPassword"];
     
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if ($conn->connect_error){
@@ -26,8 +26,8 @@
             returnWithError("Username already exists.");
         }
         else {
-            $stmt = $conn->prepare("INSERT INTO University (Name, Student_Email_Domain, Username, Password) VALUES (?, ? ,? ,?)");
-            $stmt->bind_param($schoolName, $schoolDomain, $signupUsername, $signupPassword);
+            $stmt = $conn->prepare("INSERT INTO University (Name, Username, Password) VALUES (?, ? ,?)");
+            $stmt->bind_param($schoolName, $signupUsername, $signupPassword);
             $stmt->execute();
             $stmt->close();
             $conn->close();
