@@ -27,11 +27,12 @@ function doSchoolSignup()
 	var hash = md5( password );
 	let xhr = new XMLHttpRequest();
 //	Need to edit the url based on the php files given to us
-	let url = 'api/RegisterUser.php';
+	let url = 'api/RegisterSchool.php';
 
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"schoolName" : "' + schoolName + '", "signupSchoolUsername" : "' + signupSchoolUsername + '", "signupSchoolPassword" : "' + hash + '"}';
+	console.log(jsonPayload);
 	xhr.send(jsonPayload);	
 	
 }
@@ -39,94 +40,94 @@ function doSchoolSignup()
 
 
 // Searching for Domains that exist in the database
-function doSchoolSearch()
-{
-	// for testing purposes - delete later
+// function doSchoolSearch()
+// {
+// 	// for testing purposes - delete later
 	
-	var jsonData = '["ucf", "fsu", "valencia", "Seminole"]';
+// 	var jsonData = '["ucf", "fsu", "valencia", "Seminole"]';
 	
 	
-	// console.log(jsonData);
-	// var mydata = JSON.parse(jsonData);
+// 	// console.log(jsonData);
+// 	// var mydata = JSON.parse(jsonData);
 	
-	// end test
+// 	// end test
 	
-	var jsonPayload = '';
-	var isearch = "domain";
+// 	var jsonPayload = '';
+// 	var isearch = "domain";
 	
-	var url = '../api/SearchContact.php';
+// 	var url = '../api/SearchContact.php';
 	
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+// 	var xhr = new XMLHttpRequest();
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	
-	//  payload depending on searchBy
-	jsonPayload =  '{"domain" : "' + isearch + '"}';
-	try
-	{
-		console.log("This is the payload: " + jsonPayload);
-		xhr.send(jsonPayload);
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				//var jsonObject = JSON.parse(xhr.responseText);
-				var jsonObject = JSON.parse(jsonData);
+// 	//  payload depending on searchBy
+// 	jsonPayload =  '{"domain" : "' + isearch + '"}';
+// 	try
+// 	{
+// 		console.log("This is the payload: " + jsonPayload);
+// 		xhr.send(jsonPayload);
+// 		xhr.onreadystatechange = function()
+// 		{
+// 			if (this.readyState == 4 && this.status == 200)
+// 			{
+// 				//var jsonObject = JSON.parse(xhr.responseText);
+// 				var jsonObject = JSON.parse(jsonData);
 				
-				console.log("This is the result: " + JSON.stringify(jsonObject));
+// 				console.log("This is the result: " + JSON.stringify(jsonObject));
 
-				if (jsonObject.error == "")
-				{
-					document.getElementById("searchResult").innerHTML = "Contact(s) have been retrieved";
-				}
-					else	
-				{
-					document.getElementById("searchResult").innerHTML = jsonObject.error;
-					document.getElementById("searchList").innerHTML = "";
-					return;
-				}	
+// 				if (jsonObject.error == "")
+// 				{
+// 					document.getElementById("searchResult").innerHTML = "Contact(s) have been retrieved";
+// 				}
+// 					else	
+// 				{
+// 					document.getElementById("searchResult").innerHTML = jsonObject.error;
+// 					document.getElementById("searchList").innerHTML = "";
+// 					return;
+// 				}	
 			  
-				array = new Array(jsonObject.results.length);
+// 				array = new Array(jsonObject.results.length);
 
-			   // array = localArray;
+// 			   // array = localArray;
 
-				for (var i = 0; i < array.length; i++)
-				{
-					array[i] = new Array(9);
-				}
+// 				for (var i = 0; i < array.length; i++)
+// 				{
+// 					array[i] = new Array(9);
+// 				}
 
-				for (var i = 0; i < jsonObject.results.length; i++)
-				{
-				  array[i] = jsonObject.result[i].school
-				}
-				popSchoolDropdown(array);
-			}
-		};
-	}
-	catch(err)
-	{
-		document.getElementById("searchResult").innerHTML = err.message;
-	}
+// 				for (var i = 0; i < jsonObject.results.length; i++)
+// 				{
+// 				  array[i] = jsonObject.result[i].school
+// 				}
+// 				popSchoolDropdown(array);
+// 			}
+// 		};
+// 	}
+// 	catch(err)
+// 	{
+// 		document.getElementById("searchResult").innerHTML = err.message;
+// 	}
 	
-}
+// }
 
 
-function popSchoolDropdown(array)
-{
-	var select = document.getElementById("school"); 
-	var options = array; 
+// function popSchoolDropdown(array)
+// {
+// 	var select = document.getElementById("school"); 
+// 	var options = array; 
 
-	for(var i = 0; i < options.length; i++) 
-	{
-		var opt = options[i];
+// 	for(var i = 0; i < options.length; i++) 
+// 	{
+// 		var opt = options[i];
 
-		var el = document.createElement("option");
-		el.text = opt;
-		el.value = opt;
+// 		var el = document.createElement("option");
+// 		el.text = opt;
+// 		el.value = opt;
 
-		select.add(el);
-	}
-}
+// 		select.add(el);
+// 	}
+// }
 
 
 
