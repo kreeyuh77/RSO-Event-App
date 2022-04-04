@@ -17,8 +17,8 @@
 
 		var login = document.getElementById("loginName").value;
 		var password = document.getElementById("loginPassword").value;
-		var schoolbool = document.getElementById("schoolbool").check;
-		
+		var schoolbool = document.getElementById("schoolbool").checked;
+		console.log(login, password, schoolbool);
 		
 		var hash = md5( password );
 		let xhr = new XMLHttpRequest();
