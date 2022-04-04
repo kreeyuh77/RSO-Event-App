@@ -2,21 +2,21 @@ var urlBase = 'http://wownice.club/api';
 var extension = 'php';
 
 var userId = 0;
-var firstName = "";
-var lastName = "";
-var address = "";
-var city = ""; 
-var state = "";
-var zipCode = 0;
-var phoneNumber = 0;
-var email = "";
+var userName = "";
+// var lastName = "";
+// var address = "";
+// var city = ""; 
+// var state = "";
+// var zipCode = 0;
+// var phoneNumber = 0;
+// var email = "";
 
 function saveCookie()
 {
 	var minutes = 20;
 	var date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+	document.cookie = "userId=" + userId + ",userName=" + userName + ";expires=" + date.toGMTString();
 }
 
 
@@ -30,13 +30,9 @@ function readCookie()
 	{
 		var thisOne = splits[i].trim();
 		var tokens = thisOne.split("=");
-		if( tokens[0] == "firstName" )
+		if( tokens[0] == "userName" )
 		{
-			firstName = tokens[1];
-		}
-		else if( tokens[0] == "lastName" )
-		{
-			lastName = tokens[1];
+			userName = tokens[1];
 		}
 		else if( tokens[0] == "userId" )
 		{
@@ -50,6 +46,6 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementById("userName").innerHTML = "Logged in as " + userName;
 	}
 }

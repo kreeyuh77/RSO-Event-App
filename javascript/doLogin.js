@@ -8,7 +8,7 @@
 		var minutes = 20;
 		var date = new Date();
 		date.setTime(date.getTime()+(minutes*60*1000));
-		document.cookie = "userId=" + userId + ";expires=" + date.toGMTString();
+		document.cookie = "userId=" + userId + ",userName=" + userName + ";expires=" + date.toGMTString();
 
 	}
 
@@ -36,8 +36,8 @@
 		console.log(xhr.responseText);
 
 		var jsonObject = JSON.parse( xhr.responseText );
-		 userId = jsonObject.ID;
-		// firstName = jsonObject.FirstName;
+		userId = jsonObject.ID;
+		userName = jsonObject.Name;
 		// lastName = jsonObject.LastName;
 		//userId = (schoolbool == true) ? jsonObject.schoolName : jsonObject.Name;
 		
