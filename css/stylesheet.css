@@ -175,7 +175,7 @@ span.psw {
 /*These are the styles for the pswd verification parts*/
 /* The message box is shown when the user clicks on the password field */
 #message {
-  display:none;
+  display:block;
   background: #f1f1f1;
   color: #000;
   position: relative;
@@ -184,6 +184,20 @@ span.psw {
 }
 
 #message p {
+  padding: 0px 35px;
+
+}
+
+#message2 {
+  display:block;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message2 p {
   padding: 0px 35px;
 
 }
