@@ -51,11 +51,11 @@
 			saveCookie(schoolbool);
 			if(schoolbool == true)
 			{
-				location.assign("mainSchool.html");
+				location.assign("/html/mainSchool.html");
 			}
 			else
 			{
-				location.assign("main.html");
+				location.assign("/html/main.html");
 			}	
 			
 		}

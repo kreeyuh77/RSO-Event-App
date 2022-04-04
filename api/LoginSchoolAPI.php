@@ -20,7 +20,7 @@
         if($row = $result->fetch_assoc()){
             returnWithInfo($row['Name'], $row['SchoolID']);
         } else {
-            returnWithError($inData["Password"]);
+            returnWithError("school api");
         }
 
         $stmt->close();
