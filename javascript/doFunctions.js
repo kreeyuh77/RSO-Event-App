@@ -53,8 +53,7 @@ function doSchoolDropdown()
 			var jsonObject = JSON.parse(xhr.responseText);
 			console.log("This is the result: " + JSON.stringify(jsonObject));
 			var schoolArray = new Array(Object.keys(jsonObject).length);
-			console.log("lenght of JSON: " + Object.keys(jsonObject).length);
-			console.log("length of array: " + schoolArray.length);
+			var schoolIDArray = new Array(Object.keys(jsonObject).length);
 			var select =  document.getElementById("school");
 			
 			// print to console 
@@ -64,9 +63,10 @@ function doSchoolDropdown()
 			for ( var i = 0 ; i < schoolArray.length ; i++)
 			{
 				schoolArray[i] = jsonObject[i].Name;
+				schoolIDArray[i] = jsonObject[i].SchoolID;
 				var choice = document.createElement("option");
 				choice.textContent = schoolArray[i];
-				choice.value = schoolArray[i];
+				choice.value = schoolIDArray[i];
 				select.appendChild(choice)
 			}	
 		}
