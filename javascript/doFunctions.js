@@ -335,126 +335,126 @@ function doDelete(i)
 
 
 
-function doEdit(i){
-	var contactID = array[i][8];
-	var fname = array[i][0];
-	var lname = array[i][1];
-	document.getElementById('editContact').style.display='block';
-	document.getElementById("editResult").innerHTML = "";
-	document.getElementById("editName").innerHTML = "Currently editing " + fname + " " + lname;
+// function doEdit(i){
+// 	var contactID = array[i][8];
+// 	var fname = array[i][0];
+// 	var lname = array[i][1];
+// 	document.getElementById('editContact').style.display='block';
+// 	document.getElementById("editResult").innerHTML = "";
+// 	document.getElementById("editName").innerHTML = "Currently editing " + fname + " " + lname;
 
-	document.getElementById("editType").addEventListener("change", function() {
-		var d = document.getElementById("editType");
-		var editAtt = d.options[d.selectedIndex].text;
-		console.log("This is the attribute to search by: " + editAtt);
+// 	document.getElementById("editType").addEventListener("change", function() {
+// 		var d = document.getElementById("editType");
+// 		var editAtt = d.options[d.selectedIndex].text;
+// 		console.log("This is the attribute to search by: " + editAtt);
 
-		switch (editAtt)
-		{
-			case "title":
-				document.getElementById("newinfo").value = array[i][0];
-				break;
-			case "description":
-				document.getElementById("newinfo").value = array[i][1];
-				break;
-			case "location":
-				document.getElementById("newinfo").value = array[i][2];
-				break;
-			case "when":
-				document.getElementById("newinfo").value = array[i][3];
-				break;
-			case "type":
-				document.getElementById("newinfo").value = array[i][4];
-				break;
-			case "comment":
-				document.getElementById("newinfo").value = array[i][5];
-				break;
-			case  "rate":
-				document.getElementById("newinfo").value = array[i][6];
-				break;
-	});
+// 		switch (editAtt)
+// 		{
+// 			case "title":
+// 				document.getElementById("newinfo").value = array[i][0];
+// 				break;
+// 			case "description":
+// 				document.getElementById("newinfo").value = array[i][1];
+// 				break;
+// 			case "location":
+// 				document.getElementById("newinfo").value = array[i][2];
+// 				break;
+// 			case "when":
+// 				document.getElementById("newinfo").value = array[i][3];
+// 				break;
+// 			case "type":
+// 				document.getElementById("newinfo").value = array[i][4];
+// 				break;
+// 			case "comment":
+// 				document.getElementById("newinfo").value = array[i][5];
+// 				break;
+// 			case  "rate":
+// 				document.getElementById("newinfo").value = array[i][6];
+// 				break;
+// 	});
 
-	document.getElementById("editButton").addEventListener("click", function() {
-		var jsonPayload = '';
-		var iedit = "";
-		var newinfo = document.getElementById('newinfo').value;
-		console.log("info to add: " + newinfo);
-		var url = '../api/EditContact.php';
+// 	document.getElementById("editButton").addEventListener("click", function() {
+// 		var jsonPayload = '';
+// 		var iedit = "";
+// 		var newinfo = document.getElementById('newinfo').value;
+// 		console.log("info to add: " + newinfo);
+// 		var url = '../api/EditContact.php';
 
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-		var d = document.getElementById("editType");
-		var editAtt = d.options[d.selectedIndex].text;
-		console.log("This is the attribute to search by: " + editAtt);
+// 		var xhr = new XMLHttpRequest();
+// 		xhr.open("POST", url, true);
+// 		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+// 		var d = document.getElementById("editType");
+// 		var editAtt = d.options[d.selectedIndex].text;
+// 		console.log("This is the attribute to search by: " + editAtt);
 
 
-		switch (editAtt)
-		{
-			case "title":
-				iedit = "title";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "title" : "' + newinfo + '"}';
-				break;
-			case "description":
-				iedit = "description";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "description" : "' + newinfo + '"}';
-				break;
-			case "location":
-				iedit = "location";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "location" : "' + newinfo + '"}';
-				break;
-			case "when":
-				iedit = "when";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "when" : "' + newinfo + '"}';
-				break;
-			case "type":
-				iedit = "type";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "type" : "' + newinfo + '"}';
-				break;
-			case "comment":
-				iedit = "comment";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "comment" : "' + newinfo + '"}';
-				break;
-			case  "rate":
-				iedit = "rate";
-				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "rate" : "' + newinfo + '"}';
-				break;
-		}
-		try
-		{	
-	 		console.log("This is the EDIT payload: " + jsonPayload);
-			xhr.send(jsonPayload);
-			xhr.onreadystatechange = function()
-			{
-				if (this.readyState == 4 && this.status == 200)
-				{
-					var jsonObject = JSON.parse(xhr.responseText);
-					console.log("This is the result: " + JSON.stringify(jsonObject));
+// 		switch (editAtt)
+// 		{
+// 			case "title":
+// 				iedit = "title";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "title" : "' + newinfo + '"}';
+// 				break;
+// 			case "description":
+// 				iedit = "description";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "description" : "' + newinfo + '"}';
+// 				break;
+// 			case "location":
+// 				iedit = "location";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "location" : "' + newinfo + '"}';
+// 				break;
+// 			case "when":
+// 				iedit = "when";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "when" : "' + newinfo + '"}';
+// 				break;
+// 			case "type":
+// 				iedit = "type";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "type" : "' + newinfo + '"}';
+// 				break;
+// 			case "comment":
+// 				iedit = "comment";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "comment" : "' + newinfo + '"}';
+// 				break;
+// 			case  "rate":
+// 				iedit = "rate";
+// 				jsonPayload =  '{"edit" : "' + iedit + '", "ID" : "' + userId  + '", "ContactID" : "' + contactID  + '", "rate" : "' + newinfo + '"}';
+// 				break;
+// 		}
+// 		try
+// 		{	
+// 	 		console.log("This is the EDIT payload: " + jsonPayload);
+// 			xhr.send(jsonPayload);
+// 			xhr.onreadystatechange = function()
+// 			{
+// 				if (this.readyState == 4 && this.status == 200)
+// 				{
+// 					var jsonObject = JSON.parse(xhr.responseText);
+// 					console.log("This is the result: " + JSON.stringify(jsonObject));
 
-					if (jsonObject.error == "")
-	        	{
-	          	document.getElementById("editResult").innerHTML =  fname + " " + lname + " was succesfully edited!";
-				updateTable(att, text);
+// 					if (jsonObject.error == "")
+// 	        	{
+// 	          	document.getElementById("editResult").innerHTML =  fname + " " + lname + " was succesfully edited!";
+// 				updateTable(att, text);
 			
 							
-						}
-		        else
-		        {
-		          document.getElementById("editResult").innerHTML = jsonObject.error;
-			  		return;
-		        }
+// 						}
+// 		        else
+// 		        {
+// 		          document.getElementById("editResult").innerHTML = jsonObject.error;
+// 			  		return;
+// 		        }
 					
-				}
-			}
+// 				}
+// 			}
 		
-		}
-		catch(err)
-		{
-			document.getElementById("editResult").innerHTML = err.message;
-		}
+// 		}
+// 		catch(err)
+// 		{
+// 			document.getElementById("editResult").innerHTML = err.message;
+// 		}
 		
-	});
+// 	});
 	
-}
+// }
 
 
 function doAdd()
