@@ -6,8 +6,8 @@
 
     $name = $inData["name"];
     $school = $inData["school"];
-    $email = $inData["email"];
-    $password = $inData["password"];
+    $email = $inData["schoolEmail"];
+    $password = $inData["Password"];
     
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if ($conn->connect_error){
@@ -22,11 +22,11 @@
         $row = $result->fetch_assoc();
         $stmt->close();
 
-        if ($signupUsername == $row["email"]){
+        if ($email == $row["email"]){
             returnWithError("Email already exists");
         }
         else {
-            $stmt = $conn->prepare("INSERT INTO Student (Name, School, Student_Email, Password) VALUES (?, ?, ? ,?)");
+            $stmt = $conn->prepare("INSERT INTO Student (Name, School, School_Email, Password) VALUES (?, ?, ? ,?)");
             $stmt->bind_param("ssss",$name, $school, $email, $password);
             $stmt->execute();
             $stmt->close();

@@ -8,7 +8,7 @@
         returnWithError($conn->connect_error);
     } else {        
         //$stmt = $conn->prepare("SELECT json_object(\"Name\", Name) FROM University");
-        $stmt = $conn->prepare("SELECT Name FROM University");
+        $stmt = $conn->prepare("SELECT Name, SchoolID FROM University");
         $stmt->execute();
         $result = $stmt->get_result();
         $myArray = array();
