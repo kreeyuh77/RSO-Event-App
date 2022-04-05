@@ -50,7 +50,9 @@ function doSchoolDropdown()
 		// var jsonObject = JSON.parse(xhr.responseText);
 		var jsonObject = JSON.parse(xhr.responseText);
 		console.log("This is the result: " + JSON.stringify(jsonObject));
-		var schoolArray = new Array(Object.keys(jsonObject).length);;
+		var schoolArray = new Array(Object.keys(jsonObject).length);
+		console.log("lenght of JSON: " + Object.keys(jsonObject).length);
+		console.log("length of array: " + schoolArray.length);
 		var select =  document.getElementById("school");
 		
 		// print to console 
