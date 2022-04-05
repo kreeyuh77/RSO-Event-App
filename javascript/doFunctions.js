@@ -47,12 +47,13 @@ function doSchoolDropdown()
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
 
-	var jsonObject = JSON.parse(xhr.responseText);
+	// var jsonObject = JSON.parse(xhr.responseText);
+	var jsonObject = xhr.responseText;
 	var schoolArray = new Array(jsonObject.result.length);;
 	var select =  document.getElementById("school");
 	
 	// print to console 
-	console.log("This is the school result: " + $result);
+	//console.log("This is the school result: " + $result);
 	console.log("This is the school result= " + jsonObject);
 	
 	for ( var i = 0 ; i < schoolArray.length ; i++)
