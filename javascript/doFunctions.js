@@ -33,6 +33,19 @@ function doCreateAnRSO()
 	xhr.send(jsonPayload);	
 }
 
+function doSchoolDropdown()
+{
+	// Lets create a function that reads from a json file
+	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
+	
+	// parse json file for a string
+	var jsonData = JSON.parse(Message);
+	for ( var i = 0 ; i < jsonData.school.length ; i++;)
+	{
+		var school = jsonData.school[i];
+	}		
+}
+
 
 
 var array = '';
