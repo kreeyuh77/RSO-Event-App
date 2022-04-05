@@ -45,26 +45,28 @@ function doSchoolDropdown()
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-
-	// var jsonObject = JSON.parse(xhr.responseText);
-	var jsonObject = xhr.responseText;
-	console.log("This is the school result= " + JSON.stringify(jsonObject));
-	var schoolArray = new Array(jsonObject.results.length);;
-	var select =  document.getElementById("school");
+	xhr.send(null);
+	xhr.onreadystatechange = function() {
+		// var jsonObject = JSON.parse(xhr.responseText);
+		var jsonObject = JSON.parse(xhr.responseText);
+		console.log("This is the result: " + JSON.stringify(jsonObject));
+		var schoolArray = new Array(jsonObject.results.length);;
+		var select =  document.getElementById("school");
+		
+		// print to console 
+		//console.log("This is the school result: " + $result);
+		
+		
+		for ( var i = 0 ; i < schoolArray.length ; i++)
+		{
+			schoolArray[i] = jsonObject.results[i];
+			var choice = document.createElement("option");
+			choice.textContent = schoolArray[i];
+			choice.value = schoolArray[i];
+			select.appendChild(choice)
+		}		
+	}
 	
-	// print to console 
-	//console.log("This is the school result: " + $result);
-	
-	
-	for ( var i = 0 ; i < schoolArray.length ; i++)
-	{
-		schoolArray[i] = jsonObject.results[i];
-		var choice = document.createElement("option");
-		choice.textContent = schoolArray[i];
-		choice.value = schoolArray[i];
-		select.appendChild(choice)
-	}		
 }
 
 
@@ -88,7 +90,7 @@ function updateTable(searchAtt, searchText)
 
 	document.getElementById('searchResult').innerHTML = "";
 
-	var xhr = new XMLHttpRequest();
+	var xhr = new XMLHttpRequest();	
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	//  payload depending on searchBy
