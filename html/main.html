@@ -161,8 +161,11 @@
 	// Read cookie with user info
 	document.addEventListener('DOMContentLoaded', function() {
 		readCookie();
-		}, false);
+	}, false);
 
+	document.addEventListener('DOMContentLoaded', function() {
+		doFindEvents();
+	}, false);
 
 	// Get the modal
 	var modal = document.getElementById('addEvent');
