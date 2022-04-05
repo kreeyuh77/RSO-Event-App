@@ -48,25 +48,29 @@ function doSchoolDropdown()
 	xhr.send(null);
 	xhr.onreadystatechange = function() {
 		// var jsonObject = JSON.parse(xhr.responseText);
-		var jsonObject = JSON.parse(xhr.responseText);
-		console.log("This is the result: " + JSON.stringify(jsonObject));
-		var schoolArray = new Array(Object.keys(jsonObject).length);
-		console.log("lenght of JSON: " + Object.keys(jsonObject).length);
-		console.log("length of array: " + schoolArray.length);
-		var select =  document.getElementById("school");
-		
-		// print to console 
-		//console.log("This is the school result: " + $result);
-		
-		
-		for ( var i = 0 ; i < schoolArray.length ; i++)
+		if (this.readyState == 4 && this.status == 200)
 		{
-			schoolArray[i] = jsonObject[i].Name;
-			var choice = document.createElement("option");
-			choice.textContent = schoolArray[i];
-			choice.value = schoolArray[i];
-			select.appendChild(choice)
-		}		
+			var jsonObject = JSON.parse(xhr.responseText);
+			console.log("This is the result: " + JSON.stringify(jsonObject));
+			var schoolArray = new Array(Object.keys(jsonObject).length);
+			console.log("lenght of JSON: " + Object.keys(jsonObject).length);
+			console.log("length of array: " + schoolArray.length);
+			var select =  document.getElementById("school");
+			
+			// print to console 
+			//console.log("This is the school result: " + $result);
+			
+			
+			for ( var i = 0 ; i < schoolArray.length ; i++)
+			{
+				schoolArray[i] = jsonObject[i].Name;
+				var choice = document.createElement("option");
+				choice.textContent = schoolArray[i];
+				choice.value = schoolArray[i];
+				select.appendChild(choice)
+			}	
+		}
+			
 	}
 	
 }
