@@ -188,121 +188,205 @@ function updateTable(searchAtt, searchText)
   }
 }
 
-function doSearch()
+// function doSearch()
+// {
+// 	var jsonPayload = '';
+// 	var isearch = "";
+// 	// get search attritbute
+// 	var searchText = document.getElementById('search').value;
+// 	if(searchText == "")
+// 	{
+// 		document.getElementById("searchResult").innerHTML = "Start a search to view your Events!";
+// 		document.getElementById("searchList").innerHTML = "";
+// 		return;
+// 	}
+
+// 	// the list will be put here
+// 	var contactList = "";
+// 	var url = '../api/SearchContact.php';
+
+// 	document.getElementById('searchResult').innerHTML = "";
+
+// 	var xhr = new XMLHttpRequest();
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+// 	//  payload depending on searchBy
+
+// 	var e = document.getElementById("searchType");
+// 	var searchAtt = e.options[e.selectedIndex].text;
+// 	att = searchAtt;
+// 	text = searchText;
+// 	console.log("This is the attribute to search by: " + searchAtt);
+// 	switch (searchAtt)
+// 	{
+// 	  case "title":
+// 			isearch = "title";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "title" : "' + searchText + '"}';
+// 			break;	
+// 		case "description":
+// 			isearch = "description";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "description" : "' + searchText + '"}';
+// 			break;	
+// 		case "location":
+// 			isearch = "location";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "location" : "' + searchText + '"}';
+// 			break;
+// 		case "when":
+// 			isearch = "when";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "when" : "' + searchText + '"}';
+// 			break;	
+// 		case "type":
+// 			isearch = "type";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "type" : "' + searchText + '"}';
+// 			break;
+// 	}
+//   try
+//   {
+// 		console.log("This is the payload: " + jsonPayload);
+// 		xhr.send(jsonPayload);
+// 		xhr.onreadystatechange = function()
+// 		{
+// 			if (this.readyState == 4 && this.status == 200)
+// 			{
+// 				var jsonObject = JSON.parse(xhr.responseText);
+// 				console.log("This is the result: " + JSON.stringify(jsonObject));
+
+// 				if (jsonObject.error == "")
+// 				{
+// 					document.getElementById("searchResult").innerHTML = "Event(s) have been retrieved";
+// 				}
+// 				else
+// 				{
+// 					document.getElementById("searchResult").innerHTML = jsonObject.error;
+// 					document.getElementById("searchList").innerHTML = "";
+// 					return;
+// 				}
+
+// 				array = new Array(jsonObject.results.length);
+
+// 				for (var i = 0; i < array.length; i++)
+// 				{
+// 					array[i] = new Array(5);
+// 				}
+
+// 				for (var i = 0; i < jsonObject.results.length; i++)
+// 				{
+// 					for (var j = 0; j < 5; j++)
+// 					{
+// 						if (j == 0)
+// 						{
+// 							array[i][j] = jsonObject.results[i].title;
+// 						}
+// 						if (j == 1)
+// 						{
+// 							array[i][j] = jsonObject.results[i].description;
+// 						}
+// 						if (j == 2)
+// 						{
+// 							array[i][j] = jsonObject.results[i].location;
+// 						}
+// 						if (j == 3)
+// 						{
+// 							array[i][j] = jsonObject.results[i].when;
+// 						}
+// 						if (j == 4)
+// 						{
+// 							array[i][j] = jsonObject.results[i].type;
+// 						}
+// 					}
+// 				}
+// 				createTable(array);
+// 			}
+// 		};
+//   }
+//   catch(err)
+//   {
+// 	document.getElementById("searchResult").innerHTML = err.message;
+//   }
+// }
+
+function doFindEvents()
 {
 	var jsonPayload = '';
-	var isearch = "";
-	// get search attritbute
-	var searchText = document.getElementById('search').value;
-	if(searchText == "")
+	function doSearch()
 	{
-		document.getElementById("searchResult").innerHTML = "Start a search to view your Events!";
-		document.getElementById("searchList").innerHTML = "";
-		return;
-	}
-
-	// the list will be put here
-	var contactList = "";
-	var url = '../api/SearchContact.php';
-
-	document.getElementById('searchResult').innerHTML = "";
-
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	//  payload depending on searchBy
-
-	var e = document.getElementById("searchType");
-	var searchAtt = e.options[e.selectedIndex].text;
-	att = searchAtt;
-	text = searchText;
-	console.log("This is the attribute to search by: " + searchAtt);
-	switch (searchAtt)
-	{
-	  case "title":
-			isearch = "title";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "title" : "' + searchText + '"}';
-			break;	
-		case "description":
-			isearch = "description";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "description" : "' + searchText + '"}';
-			break;	
-		case "location":
-			isearch = "location";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "location" : "' + searchText + '"}';
-			break;
-		case "when":
-			isearch = "when";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "when" : "' + searchText + '"}';
-			break;	
-		case "type":
-			isearch = "type";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "type" : "' + searchText + '"}';
-			break;
-	}
-  try
-  {
-		console.log("This is the payload: " + jsonPayload);
-		xhr.send(jsonPayload);
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
+		var jsonPayload = '';
+		
+		// the list will be put here
+		var eventList = "";
+		var url = '../api/SearchContact.php'; // REPLACE WITH PROPER PHP 
+	
+		document.getElementById('eventResult').innerHTML = "";
+	
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		
+		jsonPayload =  '{"ID" : "' + userId  + '"}';
+	  try
+	  {
+			console.log("This is the payload: " + jsonPayload);
+			xhr.send(jsonPayload);
+			xhr.onreadystatechange = function()
 			{
-				var jsonObject = JSON.parse(xhr.responseText);
-				console.log("This is the result: " + JSON.stringify(jsonObject));
-
-				if (jsonObject.error == "")
+				if (this.readyState == 4 && this.status == 200)
 				{
-					document.getElementById("searchResult").innerHTML = "Event(s) have been retrieved";
-				}
-				else
-				{
-					document.getElementById("searchResult").innerHTML = jsonObject.error;
-					document.getElementById("searchList").innerHTML = "";
-					return;
-				}
-
-				array = new Array(jsonObject.results.length);
-
-				for (var i = 0; i < array.length; i++)
-				{
-					array[i] = new Array(5);
-				}
-
-				for (var i = 0; i < jsonObject.results.length; i++)
-				{
-					for (var j = 0; j < 5; j++)
+					var jsonObject = JSON.parse(xhr.responseText);
+					console.log("This is the result: " + JSON.stringify(jsonObject));
+	
+					if (jsonObject.error == "")
 					{
-						if (j == 0)
+						document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
+					}
+					else
+					{
+						document.getElementById("eventResult").innerHTML = jsonObject.error;
+						document.getElementById("eventList").innerHTML = "";
+						return;
+					}
+	
+					array = new Array(jsonObject.results.length);
+	
+					for (var i = 0; i < array.length; i++)
+					{
+						array[i] = new Array(5);
+					}
+	
+					for (var i = 0; i < jsonObject.results.length; i++)
+					{
+						for (var j = 0; j < 5; j++)
 						{
-							array[i][j] = jsonObject.results[i].title;
-						}
-						if (j == 1)
-						{
-							array[i][j] = jsonObject.results[i].description;
-						}
-						if (j == 2)
-						{
-							array[i][j] = jsonObject.results[i].location;
-						}
-						if (j == 3)
-						{
-							array[i][j] = jsonObject.results[i].when;
-						}
-						if (j == 4)
-						{
-							array[i][j] = jsonObject.results[i].type;
+							if (j == 0)
+							{
+								array[i][j] = jsonObject.results[i].title;
+							}
+							if (j == 1)
+							{
+								array[i][j] = jsonObject.results[i].description;
+							}
+							if (j == 2)
+							{
+								array[i][j] = jsonObject.results[i].location;
+							}
+							if (j == 3)
+							{
+								array[i][j] = jsonObject.results[i].when;
+							}
+							if (j == 4)
+							{
+								array[i][j] = jsonObject.results[i].type;
+							}
 						}
 					}
+					createTable(array);
 				}
-				createTable(array);
-			}
-		};
-  }
-  catch(err)
-  {
-	document.getElementById("searchResult").innerHTML = err.message;
-  }
+			};
+	  }
+	  catch(err)
+	  {
+		document.getElementById("eventResult").innerHTML = err.message;
+	  }
+	}
 }
 
 
