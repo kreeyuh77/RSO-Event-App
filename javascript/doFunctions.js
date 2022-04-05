@@ -39,10 +39,21 @@ function doSchoolDropdown()
 	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
 	
 	// parse json file for a string
-	var jsonData = JSON.parse(Message);
-	for ( var i = 0 ; i < jsonData.school.length ; i++;)
+	var url = '../api/SearchContact.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	var jsonObject = JSON.parse(xhr.responseText);
+	var schoolArray = new Array(jsonObject.results.length);;
+	var select =  document.getElementById("school");
+	for ( var i = 0 ; i < schoolArray.length ; i++)
 	{
-		var school = jsonData.school[i];
+		var choice = document.createElement("option");
+		choice.textContent = schoolArray[i];
+		choice.value = schoolArray[i];
+		select.appendChild(choice)
 	}		
 }
 
