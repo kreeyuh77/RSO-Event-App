@@ -45,13 +45,16 @@ function doSchoolDropdown()
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+
+	var jsonObject = JSON.parse(xhr.responseText);
+	var schoolArray = new Array(jsonObject.result.length);;
+	var select =  document.getElementById("school");
 	
 	// print to console 
 	console.log("This is the school result: " + $result);
-
-	var jsonObject = JSON.parse(xhr.responseText);
-	var schoolArray = new Array(jsonObject.results.length);;
-	var select =  document.getElementById("school");
+	console.log("This is the school result= " + jsonObject);
+	
 	for ( var i = 0 ; i < schoolArray.length ; i++)
 	{
 		var choice = document.createElement("option");
