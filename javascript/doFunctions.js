@@ -314,7 +314,7 @@ function doFindEvents()
 		
 		// the list will be put here
 		var eventList = "";
-		var url = '../api/SearchContact.php'; // REPLACE WITH PROPER PHP 
+		var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
 	
 		document.getElementById('eventResult').innerHTML = "";
 	
