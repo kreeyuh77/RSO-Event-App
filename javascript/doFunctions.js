@@ -518,6 +518,7 @@ function createTableSchool(arraySchool)
 	  table+="<tr>";
 	  for (var j = 0; j < 5; j++)
 	  {
+		// can add if j = 3 that uses .toLocaleString, to format the date/time better
 	  	table+= "<td>" + arraySchool[i][j] + "</td>";
 	  }
 	  table +="<td style='word-wrap:break-word;'><span id='disapproveButton' style='width:auto;height:30px;padding:10px' onclick='doApproval(" + i + "," + 0 + ")';><i class='fa-regular fa-square-xmark'></i></span><span id='approveButton' style='width:auto;height:30px;padding:10px' onclick='doApproval(" + i + "," + 1 + ")';><i class='fa-regular fa-square-check'></i></span></td>";
