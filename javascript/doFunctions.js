@@ -394,11 +394,11 @@ function createTable(array)
 	//var table = document.createElement('table');
 	// string to create table in html
 	var table = "<table><tr>";
-	table += "<th>" + "title" + "</th>";
-	table += "<th>" + "description" + "</th>";
-	table += "<th>" + "location" + "</th>";
-	table += "<th>" + "when" + "</th>";
-	table += "<th>" + "type" + "</th>";
+	table += "<th>" + "Title" + "</th>";
+	table += "<th>" + "Description" + "</th>";
+	table += "<th>" + "Location" + "</th>";
+	table += "<th>" + "When" + "</th>";
+	table += "<th>" + "Type" + "</th>";
 	table += "<th>" + "" + "</th>";
 
 	for (var i = 0; i < array.length; i++)
@@ -408,7 +408,7 @@ function createTable(array)
 	  {
 	  	table+= "<td>" + array[i][j] + "</td>";
 	  }
-	  table +="<td style='word-wrap:break-word;'><span id='editContactButton' style='width:auto;height:30px;padding:10px' onclick='doEdit(" + i + ")';><i class='fas fa-edit'></i></span><span id='deleteContactButton' style='width:auto;height:30px;padding:10px' onclick='doDelete(" + i + ")';><i class='fas fa-trash-alt'></i></span></td>";
+	  //table +="<td style='word-wrap:break-word;'><span id='editContactButton' style='width:auto;height:30px;padding:10px' onclick='doEdit(" + i + ")';><i class='fas fa-edit'></i></span><span id='deleteContactButton' style='width:auto;height:30px;padding:10px' onclick='doDelete(" + i + ")';><i class='fas fa-trash-alt'></i></span></td>";
 	  table+="</tr>";
 	}
 	table+="</table>";
