@@ -404,7 +404,7 @@ function createTable(array)
 	for (var i = 0; i < array.length; i++)
 	{
 	  table+="<tr>";
-	  for (var j = 0; j < 8; j++)
+	  for (var j = 0; j < 5; j++)
 	  {
 	  	table+= "<td>" + array[i][j] + "</td>";
 	  }
@@ -412,7 +412,7 @@ function createTable(array)
 	  table+="</tr>";
 	}
 	table+="</table>";
-	document.getElementById("searchList").innerHTML = table;
+	document.getElementById("eventList").innerHTML = table;
 }
 
 
