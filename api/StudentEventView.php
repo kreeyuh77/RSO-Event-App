@@ -10,7 +10,8 @@
     if ($conn->connect_error){
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("SELECT * FROM Events WHERE (SchoolID = (SELECT SchoolID FROM Student WHERE StudentID = $id))");
+        $stmt = $conn->prepare("SELECT * FROM Events WHERE (SchoolID = (SELECT SchoolID FROM Student WHERE StudentID = ?))");
+        $stmt->bind_param("s", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $myArray = array();
