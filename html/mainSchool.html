@@ -42,8 +42,9 @@
 
 				<!--items displays here-->
 				<hr>
-				<p id="searchResult">Click to approve or disapprove events!</p>
-				<div id="searchList"></div>
+				<p>Events awating approval</p><br>
+				<p id="eventResult"></p>
+				<div id="eventList"></div>
 		</div>
 
 
@@ -53,7 +54,9 @@
 		readCookie();
 		}, false);
 
-
+	document.addEventListener('DOMContentLoaded', function() {
+		doFindEventsSchool();
+		}, false);	
 	
 
 	</script>

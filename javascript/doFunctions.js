@@ -76,8 +76,9 @@ function doSchoolDropdown()
 }
 
 
-
+// holds array of events returned for home page
 var array = '';
+var arraySchool = '';
 // var att = '';
 // var text ='';
 
@@ -415,45 +416,196 @@ function createTable(array)
 	document.getElementById("eventList").innerHTML = table;
 }
 
-
-function doDelete(i)
+function doFindEventsSchool()
 {
-	var contactID = array[i][8];
-	var fname = array[i][0];
-	var lname = array[i][1];
-	document.getElementById('deleteContact').style.display='block';
-	document.getElementById("deleteResult").innerHTML = "";
-	document.getElementById("deleteName").innerHTML = "Are you sure you want to remove " + fname + " " + lname + " from your event list?";
-	document.getElementById("deleteButton").addEventListener("click", function() {
-		var jsonPayload = '{"ContactID" : "' + contactID + '"}';
-		//Need to edit the url based on the php files given to us
-		var url = '../api/RemoveContact.php';
-
+		var jsonPayload = '';
+		// the list will be put here
+		var eventList = "";
+		var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
+	
+		document.getElementById('eventResult').innerHTML = "";
+	
 		var xhr = new XMLHttpRequest();
-		xhr.open("DELETE", url, true);
+		xhr.open("POST", url, true);
 		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-		try
-		{
+		
+		jsonPayload =  '{"ID" : "' + userId  + '"}';
+	  try
+	  {
+			console.log("This is the payload: " + jsonPayload);
+			xhr.send(jsonPayload);
 			xhr.onreadystatechange = function()
 			{
 				if (this.readyState == 4 && this.status == 200)
 				{
-					document.getElementById("deleteResult").innerHTML = fname + " " + lname + " has been deleted!";
-					updateTable(att, text);
-					
+					var jsonObject = JSON.parse(xhr.responseText);
+					console.log("This is the result: " + JSON.stringify(jsonObject));
+	
+					// if (jsonObject.error == "")
+					// {
+					// 	document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
+					// }
+					// else
+					// {
+					// 	document.getElementById("eventResult").innerHTML = jsonObject.error;
+					// 	document.getElementById("eventList").innerHTML = "";
+					// 	return;
+					// }
+					console.log("about to create array");
+					var numElements = Object.keys(jsonObject).length;
+					arraySchool = new Array(numElements);
+	
+					for (var i = 0; i < arraySchool.length; i++)
+					{
+						arraySchool[i] = new Array(5);
+					}
+	
+					for (var i = 0; i < numElements; i++)
+					{
+						for (var j = 0; j < 6; j++)
+						{
+							if (j == 0)
+							{
+								arraySchool[i][j] = jsonObject[i].Name;
+							}
+							if (j == 1)
+							{
+								arraySchool[i][j] = jsonObject[i].Description;
+							}
+							if (j == 2)
+							{
+								arraySchool[i][j] = jsonObject[i].Location;
+							}
+							if (j == 3)
+							{
+								arraySchool[i][j] = jsonObject[i].Datetime;
+							}
+							if (j == 4)
+							{
+								arraySchool[i][j] = jsonObject[i].Type;
+							}
+							if (j == 5)
+							{
+								arraySchool[i][j] = jsonObject[i].ID;
+							}
+						}
+					}
+					console.log(arraySchool);
+					createTableSchool(arraySchool);
+				}
+			};
+	  }
+	  catch(err)
+	  {
+		document.getElementById("eventResult").innerHTML = err.message;
+	  }
+}
+
+function createTableSchool(arraySchool)
+{
+	//var table = document.createElement('table');
+	// string to create table in html
+	var table = "<table><tr>";
+	table += "<th>" + "Title" + "</th>";
+	table += "<th>" + "Description" + "</th>";
+	table += "<th>" + "Location" + "</th>";
+	table += "<th>" + "When" + "</th>";
+	table += "<th>" + "Type" + "</th>";
+	table += "<th>" + "" + "</th>";
+
+	for (var i = 0; i < arraySchool.length; i++)
+	{
+	  table+="<tr>";
+	  for (var j = 0; j < 5; j++)
+	  {
+	  	table+= "<td>" + arraySchool[i][j] + "</td>";
+	  }
+	  table +="<td style='word-wrap:break-word;'><span id='disapproveButton' style='width:auto;height:30px;padding:10px' onclick='doApproval(" + i + "," + 0 + ")';><i class='fa-regular fa-square-xmark'></i></span><span id='approveButton' style='width:auto;height:30px;padding:10px' onclick='doApproval(" + i + "," + 1 + ")';><i class='fa-regular fa-square-check'></i></span></td>";
+	  table+="</tr>";
+	}
+	table+="</table>";
+	document.getElementById("eventList").innerHTML = table;
+}
+
+function doApproval(i, val)
+{
+	var eventID = schoolArray[i][5];
+	var eventName = schoolArray[i][0];
+	var jsonPayload = '';
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");	
+	jsonPayload =  '{"eventID" : "' + eventID + '", "ApprovalCode" : "' + val  + '"}';
+
+	try 
+	{
+		xhr.send(jsonPayload);
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log("This is the result: " + JSON.stringify(jsonObject));
+
+				// display success message
+				if (val == 0)
+				{
+					document.getElementById("eventResult").innerHTML = eventName + " has been denied";
+				}
+				if (val == 1)
+				{
+					document.getElementById("eventResult").innerHTML = eventName + " has been approved";
 				}
 			}
-			xhr.send(jsonPayload);
-			
 		}
-		catch(err)
-		{
-			document.getElementById("deleteResult").innerHTML = err.message;
-		}
-		
-	});
+	}
+	catch(err)
+	{
+		document.getElementById("eventResult").innerHTML = err.message;
+	}
 	
+
+
 }
+
+// function doDelete(i)
+// {
+// 	var contactID = array[i][8];
+// 	var fname = array[i][0];
+// 	var lname = array[i][1];
+// 	document.getElementById('deleteContact').style.display='block';
+// 	document.getElementById("deleteResult").innerHTML = "";
+// 	document.getElementById("deleteName").innerHTML = "Are you sure you want to remove " + fname + " " + lname + " from your event list?";
+// 	document.getElementById("deleteButton").addEventListener("click", function() {
+// 		var jsonPayload = '{"ContactID" : "' + contactID + '"}';
+// 		//Need to edit the url based on the php files given to us
+// 		var url = '../api/RemoveContact.php';
+
+// 		var xhr = new XMLHttpRequest();
+// 		xhr.open("DELETE", url, true);
+// 		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+// 		try
+// 		{
+// 			xhr.onreadystatechange = function()
+// 			{
+// 				if (this.readyState == 4 && this.status == 200)
+// 				{
+// 					document.getElementById("deleteResult").innerHTML = fname + " " + lname + " has been deleted!";
+// 					updateTable(att, text);
+					
+// 				}
+// 			}
+// 			xhr.send(jsonPayload);
+			
+// 		}
+// 		catch(err)
+// 		{
+// 			document.getElementById("deleteResult").innerHTML = err.message;
+// 		}
+		
+// 	});
+	
+// }
 
 
 
