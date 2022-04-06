@@ -307,11 +307,7 @@ function updateTable(searchAtt, searchText)
 
 function doFindEvents()
 {
-	var jsonPayload = '';
-	function doSearch()
-	{
 		var jsonPayload = '';
-		
 		// the list will be put here
 		var eventList = "";
 		var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
@@ -386,7 +382,6 @@ function doFindEvents()
 	  {
 		document.getElementById("eventResult").innerHTML = err.message;
 	  }
-	}
 }
 
 
