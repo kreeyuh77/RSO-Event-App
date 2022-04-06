@@ -355,23 +355,23 @@ function doFindEvents()
 						{
 							if (j == 0)
 							{
-								array[i][j] = jsonObject.results[i].Name;
+								array[i][j] = jsonObject[i].Name;
 							}
 							if (j == 1)
 							{
-								array[i][j] = jsonObject.results[i].Description;
+								array[i][j] = jsonObject[i].Description;
 							}
 							if (j == 2)
 							{
-								array[i][j] = jsonObject.results[i].Location;
+								array[i][j] = jsonObject[i].Location;
 							}
 							if (j == 3)
 							{
-								array[i][j] = jsonObject.results[i].Datetime;
+								array[i][j] = jsonObject[i].Datetime;
 							}
 							if (j == 4)
 							{
-								array[i][j] = jsonObject.results[i].Type;
+								array[i][j] = jsonObject[i].Type;
 							}
 						}
 					}
