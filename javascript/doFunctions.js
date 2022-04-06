@@ -78,115 +78,115 @@ function doSchoolDropdown()
 
 
 var array = '';
-var att = '';
-var text ='';
+// var att = '';
+// var text ='';
 
-function updateTable(searchAtt, searchText)
-{
-	var jsonPayload = '';
-	var isearch = "";
+// function updateTable(searchAtt, searchText)
+// {
+// 	var jsonPayload = '';
+// 	var isearch = "";
 
-	if(searchText == ""){
-		document.getElementById("searchResult").innerHTML = "Start a search to view Events!";
-		document.getElementById("searchList").innerHTML = "";
-		return;
-	}
+// 	if(searchText == ""){
+// 		document.getElementById("searchResult").innerHTML = "Start a search to view Events!";
+// 		document.getElementById("searchList").innerHTML = "";
+// 		return;
+// 	}
 
-	var url = '../api/SearchContact.php';
+// 	var url = '../api/SearchContact.php';
 
-	document.getElementById('searchResult').innerHTML = "";
+// 	document.getElementById('searchResult').innerHTML = "";
 
-	var xhr = new XMLHttpRequest();	
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	//  payload depending on searchBy
+// 	var xhr = new XMLHttpRequest();	
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+// 	//  payload depending on searchBy
 
-	switch (searchAtt)
-	{
-		case "title":
-			isearch = "title";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "title" : "' + searchText + '"}';
-			break;	
-		case "description":
-			isearch = "description";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "description" : "' + searchText + '"}';
-			break;	
-		case "location":
-			isearch = "location";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "location" : "' + searchText + '"}';
-			break;
-		case "when":
-			isearch = "when";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "when" : "' + searchText + '"}';
-			break;	
-		case "type":
-			isearch = "type";
-			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "type" : "' + searchText + '"}';
-			break;
+// 	switch (searchAtt)
+// 	{
+// 		case "title":
+// 			isearch = "title";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "title" : "' + searchText + '"}';
+// 			break;	
+// 		case "description":
+// 			isearch = "description";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "description" : "' + searchText + '"}';
+// 			break;	
+// 		case "location":
+// 			isearch = "location";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "location" : "' + searchText + '"}';
+// 			break;
+// 		case "when":
+// 			isearch = "when";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "when" : "' + searchText + '"}';
+// 			break;	
+// 		case "type":
+// 			isearch = "type";
+// 			jsonPayload =  '{"search" : "' + isearch + '", "ID" : "' + userId  + '", "type" : "' + searchText + '"}';
+// 			break;
 
-	}
-   try
-   {
-		console.log("This is the payload: " + jsonPayload);
-		xhr.send(jsonPayload);
-		xhr.onreadystatechange = function()
-		{
-			if (this.readyState == 4 && this.status == 200)
-			{
-				var jsonObject = JSON.parse(xhr.responseText);
-				console.log("This is the result: " + JSON.stringify(jsonObject));
+// 	}
+//    try
+//    {
+// 		console.log("This is the payload: " + jsonPayload);
+// 		xhr.send(jsonPayload);
+// 		xhr.onreadystatechange = function()
+// 		{
+// 			if (this.readyState == 4 && this.status == 200)
+// 			{
+// 				var jsonObject = JSON.parse(xhr.responseText);
+// 				console.log("This is the result: " + JSON.stringify(jsonObject));
 
-			if (jsonObject.error == "")
-  		{
- 	  		document.getElementById("searchResult").innerHTML = "Event(s) have been retrieved";
-   		}
-   	 	else
-   	 	{
-    		document.getElementById("searchResult").innerHTML = jsonObject.error;
-				document.getElementById("searchList").innerHTML = "";
-	  		return;
-      }
+// 			if (jsonObject.error == "")
+//   		{
+//  	  		document.getElementById("searchResult").innerHTML = "Event(s) have been retrieved";
+//    		}
+//    	 	else
+//    	 	{
+//     		document.getElementById("searchResult").innerHTML = jsonObject.error;
+// 				document.getElementById("searchList").innerHTML = "";
+// 	  		return;
+//       }
 
-			array = new Array(jsonObject.results.length);
-			for (var i = 0; i < array.length; i++)
-			{
-				array[i] = new Array(5);
-			}
-			for (var i = 0; i < jsonObject.results.length; i++)
-			{
-			  for (var j = 0; j < 5; j++)
-			  {
-			    if (j == 0)
-			    {
-			      array[i][j] = jsonObject.results[i].title;
-			    }
-			    if (j == 1)
-			    {
-			      array[i][j] = jsonObject.results[i].description;
-			    }
-			    if (j == 2)
-			    {
-			      array[i][j] = jsonObject.results[i].location;
-			    }
-			    if (j == 3)
-			    {
-			      array[i][j] = jsonObject.results[i].when;
-			    }
-			    if (j == 4)
-			    {
-			      array[i][j] = jsonObject.results[i].type;
-			    }
-	       }
-	     }
-	     createTable(array);
-			}
-		};
-	}
-  catch(err)
-  {
-		document.getElementById("searchResult").innerHTML = err.message;
-  }
-}
+// 			array = new Array(jsonObject.results.length);
+// 			for (var i = 0; i < array.length; i++)
+// 			{
+// 				array[i] = new Array(5);
+// 			}
+// 			for (var i = 0; i < jsonObject.results.length; i++)
+// 			{
+// 			  for (var j = 0; j < 5; j++)
+// 			  {
+// 			    if (j == 0)
+// 			    {
+// 			      array[i][j] = jsonObject.results[i].title;
+// 			    }
+// 			    if (j == 1)
+// 			    {
+// 			      array[i][j] = jsonObject.results[i].description;
+// 			    }
+// 			    if (j == 2)
+// 			    {
+// 			      array[i][j] = jsonObject.results[i].location;
+// 			    }
+// 			    if (j == 3)
+// 			    {
+// 			      array[i][j] = jsonObject.results[i].when;
+// 			    }
+// 			    if (j == 4)
+// 			    {
+// 			      array[i][j] = jsonObject.results[i].type;
+// 			    }
+// 	       }
+// 	     }
+// 	     createTable(array);
+// 			}
+// 		};
+// 	}
+//   catch(err)
+//   {
+// 		document.getElementById("searchResult").innerHTML = err.message;
+//   }
+// }
 
 // function doSearch()
 // {
@@ -354,26 +354,27 @@ function doFindEvents()
 						{
 							if (j == 0)
 							{
-								array[i][j] = jsonObject.results[i].title;
+								array[i][j] = jsonObject.results[i].Name;
 							}
 							if (j == 1)
 							{
-								array[i][j] = jsonObject.results[i].description;
+								array[i][j] = jsonObject.results[i].Description;
 							}
 							if (j == 2)
 							{
-								array[i][j] = jsonObject.results[i].location;
+								array[i][j] = jsonObject.results[i].Location;
 							}
 							if (j == 3)
 							{
-								array[i][j] = jsonObject.results[i].when;
+								array[i][j] = jsonObject.results[i].Datetime;
 							}
 							if (j == 4)
 							{
-								array[i][j] = jsonObject.results[i].type;
+								array[i][j] = jsonObject.results[i].Type;
 							}
 						}
 					}
+					console.log(array);
 					createTable(array);
 				}
 			};
