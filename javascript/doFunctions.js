@@ -340,7 +340,7 @@ function doFindEvents()
 						document.getElementById("eventList").innerHTML = "";
 						return;
 					}
-	
+					console.log("about to create array");
 					array = new Array(jsonObject.results.length);
 	
 					for (var i = 0; i < array.length; i++)
