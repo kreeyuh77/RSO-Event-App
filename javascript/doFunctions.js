@@ -330,25 +330,26 @@ function doFindEvents()
 					var jsonObject = JSON.parse(xhr.responseText);
 					console.log("This is the result: " + JSON.stringify(jsonObject));
 	
-					if (jsonObject.error == "")
-					{
-						document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
-					}
-					else
-					{
-						document.getElementById("eventResult").innerHTML = jsonObject.error;
-						document.getElementById("eventList").innerHTML = "";
-						return;
-					}
+					// if (jsonObject.error == "")
+					// {
+					// 	document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
+					// }
+					// else
+					// {
+					// 	document.getElementById("eventResult").innerHTML = jsonObject.error;
+					// 	document.getElementById("eventList").innerHTML = "";
+					// 	return;
+					// }
 					console.log("about to create array");
-					array = new Array(jsonObject.results.length);
+					var numElements = Object.keys(jsonObject).length;
+					array = new Array(numElements);
 	
 					for (var i = 0; i < array.length; i++)
 					{
 						array[i] = new Array(5);
 					}
 	
-					for (var i = 0; i < jsonObject.results.length; i++)
+					for (var i = 0; i < numElements; i++)
 					{
 						for (var j = 0; j < 5; j++)
 						{
