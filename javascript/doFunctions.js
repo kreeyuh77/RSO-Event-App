@@ -88,7 +88,7 @@ function doSchoolDropdown()
 				var choice = document.createElement("option");
 				choice.textContent = schoolArray[i];
 				choice.value = schoolIDArray[i];
-				select.appendChild(choice)
+				select.appendChild(choice);
 			}	
 		}
 			
