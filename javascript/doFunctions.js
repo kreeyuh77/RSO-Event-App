@@ -486,7 +486,7 @@ function doFindEventsSchool()
 							}
 							if (j == 5)
 							{
-								arraySchool[i][j] = jsonObject[i].ID;
+								arraySchool[i][j] = jsonObject[i].id;
 							}
 						}
 					}
