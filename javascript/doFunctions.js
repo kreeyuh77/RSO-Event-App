@@ -546,8 +546,8 @@ function doApproval(i, val)
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				var jsonObject = JSON.parse(xhr.responseText);
-				console.log("This is the result: " + JSON.stringify(jsonObject));
+				//var jsonObject = JSON.parse(xhr.responseText);
+				//console.log("This is the result: " + JSON.stringify(jsonObject));
 
 				// display success message
 				if (val == 0)
