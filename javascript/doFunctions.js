@@ -559,6 +559,7 @@ function doApproval(i, val)
 					document.getElementById("eventResult").innerHTML = eventName + " has been approved";
 				}
 			}
+			doFindEventsSchool();
 		}
 	}
 	catch(err)
