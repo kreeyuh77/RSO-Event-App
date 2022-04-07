@@ -24,13 +24,34 @@ function doCreateAnRSO()
 	var RSOName = document.getElementById("RSOName").value;
 	
 	let xhr = new XMLHttpRequest();
-//	Need to edit the url based on the php files given to us
-	let url = 'api/RegisterUser.php';
-
+	let url = 'api/RegisterUser.php'; // CHANGE PHP NAME
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-Type", "application/json");
-	var jsonPayload = '{"RSOName" : "' + RSOName + '"}';
-	xhr.send(jsonPayload);	
+	var jsonPayload = '{"RSOName" : "' + RSOName + '", "ID" : "' + userId + '"}';
+	xhr.send(jsonPayload);
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				if (jsonObject.error == "")
+				{
+					document.getElementById("createRSOResult").innerHTML = "Successfully created RSO";
+				}
+				else
+				{
+					document.getElementById("createRSOResult").innerHTML = "You are already an admin of an RSO, you cannot create another.";
+					return;
+				}
+			} 			
+		}		
+	}
+	catch(err)
+	{
+		document.getElementById("addResult").innerHTML = err.message;
+	}	
+	
 }
 
 function doSchoolDropdown()
