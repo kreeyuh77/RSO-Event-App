@@ -1,6 +1,5 @@
 function doCreateEvent()
 {
-	
 	var title = document.getElementById("title").value;
 	var description = document.getElementById("description").value; //might want to change id in main.html
 	var location = document.getElementById("location").value;
@@ -8,14 +7,34 @@ function doCreateEvent()
 	var type = document.getElementById("type").value;
 	
 	let xhr = new XMLHttpRequest();
-//	Need to edit the url based on the php files given to us
-	let url = 'api/RegisterUser.php';
-
-	xhr.open("POST", url, false);
+	let url = '../api/CreateRSO.php'; // CHANGE PHP NAME
+	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
-	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + '"}';
-	xhr.send(jsonPayload);	
-	
+	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + + '", "ID" : "' + userId +'"}';
+	xhr.send(jsonPayload);
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				if (jsonObject.error == "")
+				{
+					document.getElementById("addResult").innerHTML = "Successfully created event";
+				}
+				else
+				{
+					document.getElementById("addResult").innerHTML = "Error creating event";
+					return;
+				}
+			} 			
+		}		
+	}
+	catch(err)
+	{
+		document.getElementById("addResult").innerHTML = err.message;
+	}	
 }
 
 
@@ -50,7 +69,7 @@ function doCreateRSO()
 	}
 	catch(err)
 	{
-		document.getElementById("addResult").innerHTML = err.message;
+		document.getElementById("createRSOResult").innerHTML = err.message;
 	}	
 }
 
