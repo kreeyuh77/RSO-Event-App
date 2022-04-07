@@ -3,13 +3,9 @@ var extension = 'php';
 
 var userId = 0;
 var userName = "";
-// var lastName = "";
-// var address = "";
-// var city = ""; 
-// var state = "";
-// var zipCode = 0;
-// var phoneNumber = 0;
-// var email = "";
+// var eventId = 0;
+// var eventName = "";
+
 
 function saveCookie()
 {
@@ -24,6 +20,9 @@ function saveCookie()
 function readCookie()
 {
 	userId = -1;
+	userName = "-1";
+	// eventId = -1;
+	// eventName = "-1";
 	var data = document.cookie;
 	var splits = data.split(",");
 	for(var i = 0; i < splits.length; i++) 
@@ -38,6 +37,14 @@ function readCookie()
 		{
 			userId = parseInt( tokens[1].trim() );
 		}
+		// else if( tokens[0] == "eventId" )
+		// {
+		// 	userId = parseInt( tokens[1].trim() );
+		// }
+		// else if( tokens[0] == "eventName" )
+		// {
+		// 	userId = parseInt( tokens[1].trim() );
+		// }
 	}
 	
 	if( userId < 0 )
