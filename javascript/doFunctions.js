@@ -19,7 +19,7 @@ function doCreateAnEvent()
 }
 
 
-function doCreateAnRSO()
+function doCreateRSO()
 {
 	var RSOName = document.getElementById("RSOName").value;
 	
