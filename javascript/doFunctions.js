@@ -24,8 +24,8 @@ function doCreateRSO()
 	var RSOName = document.getElementById("RSOName").value;
 	
 	let xhr = new XMLHttpRequest();
-	let url = '.../api/CreateRSO.php'; // CHANGE PHP NAME
-	xhr.open("POST", url, false);
+	let url = '../api/CreateRSO.php'; // CHANGE PHP NAME
+	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"RSOName" : "' + RSOName + '", "ID" : "' + userId + '"}';
 	xhr.send(jsonPayload);
