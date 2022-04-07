@@ -7,10 +7,10 @@ function doCreateEvent()
 	var type = document.getElementById("type").value;
 	
 	let xhr = new XMLHttpRequest();
-	let url = '../api/CreateRSO.php'; // CHANGE PHP NAME
+	let url = '../api/CreateEvent.php'; // CHANGE PHP NAME
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
-	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + + '", "ID" : "' + userId +'"}';
+	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + '", "ID" : "' + userId +'"}';
 	xhr.send(jsonPayload);
 	try
 	{
