@@ -1,4 +1,4 @@
-function doCreateAnEvent()
+function doCreateEvent()
 {
 	
 	var title = document.getElementById("title").value;
