@@ -35,6 +35,7 @@ function doCreateRSO()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
+				var jsonObject = JSON.parse(xhr.responseText);
 				if (jsonObject.error == "")
 				{
 					document.getElementById("createRSOResult").innerHTML = "Successfully created RSO";
@@ -51,7 +52,6 @@ function doCreateRSO()
 	{
 		document.getElementById("addResult").innerHTML = err.message;
 	}	
-	
 }
 
 function doSchoolDropdown()
