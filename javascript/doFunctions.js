@@ -313,7 +313,7 @@ function doFindEvents()
 		var eventList = "";
 		var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
 	
-		document.getElementById('eventResult').innerHTML = "";
+		//document.getElementById('eventResult').innerHTML = "";
 	
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", url, true);
