@@ -444,7 +444,7 @@ function doFindEventsSchool()
 		var eventList = "";
 		var url = '../api/SchoolEventView.php'; // REPLACE WITH PROPER PHP 
 	
-		document.getElementById('eventResult').innerHTML = "";
+		//document.getElementById('eventResult').innerHTML = "";
 	
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", url, true);
@@ -580,7 +580,7 @@ function doApproval(i, val)
 					document.getElementById("eventResult").innerHTML = eventName + " has been approved";
 				}
 			}
-			//doFindEventsSchool();
+			doFindEventsSchool();
 		}
 	}
 	catch(err)
