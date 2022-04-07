@@ -421,7 +421,7 @@ function doFindEventsSchool()
 		var jsonPayload = '';
 		// the list will be put here
 		var eventList = "";
-		var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
+		var url = '../api/SchoolEventView.php'; // REPLACE WITH PROPER PHP 
 	
 		document.getElementById('eventResult').innerHTML = "";
 	
@@ -534,6 +534,7 @@ function doApproval(i, val)
 	var eventName = schoolArray[i][0];
 	var jsonPayload = '';
 	var xhr = new XMLHttpRequest();
+	var url = '../api/ApproveEvents.php';
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");	
 	jsonPayload =  '{"eventID" : "' + eventID + '", "ApprovalCode" : "' + val  + '"}';

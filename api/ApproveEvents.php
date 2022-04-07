@@ -4,14 +4,16 @@
 
     $inData = getRequestInfo();
 
-    $id = $inData['ID'];
+    $id = $inData['eventID'];
+    $code = $inData['ApprovalCode'];
+    
 
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if ($conn->connect_error){
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("SELECT * FROM Events WHERE (SchoolID = (SELECT SchoolID FROM Student WHERE StudentID = ?))");
-        $stmt->bind_param("s", $id);
+        $stmt = $conn->prepare("UPDATE Events SET (Approved = ?) WHERE (id = ?)");
+        $stmt->bind_param("ss", $code, $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $myArray = array();
