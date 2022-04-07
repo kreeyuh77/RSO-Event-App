@@ -530,8 +530,8 @@ function createTableSchool(arraySchool)
 
 function doApproval(i, val)
 {
-	var eventID = schoolArray[i][5];
-	var eventName = schoolArray[i][0];
+	var eventID = arraySchool[i][5];
+	var eventName = arraySchool[i][0];
 	var jsonPayload = '';
 	var xhr = new XMLHttpRequest();
 	var url = '../api/ApproveEvents.php';
