@@ -451,7 +451,7 @@ function doFindEventsSchool()
 					// 	document.getElementById("eventList").innerHTML = "";
 					// 	return;
 					// }
-					console.log("about to create array");
+					//console.log("about to create array");
 					var numElements = Object.keys(jsonObject).length;
 					arraySchool = new Array(numElements);
 	
@@ -538,7 +538,7 @@ function doApproval(i, val)
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");	
 	jsonPayload =  '{"eventID" : "' + eventID + '", "ApprovalCode" : "' + val  + '"}';
-
+	console.log("This is the payload: " + jsonPayload);
 	try 
 	{
 		xhr.send(jsonPayload);
@@ -559,7 +559,7 @@ function doApproval(i, val)
 					document.getElementById("eventResult").innerHTML = eventName + " has been approved";
 				}
 			}
-			doFindEventsSchool();
+			//doFindEventsSchool();
 		}
 	}
 	catch(err)
