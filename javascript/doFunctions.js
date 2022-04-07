@@ -2,8 +2,8 @@ function doCreateAnEvent()
 {
 	
 	var title = document.getElementById("title").value;
-	var description = document.getElementById("lastName").value; //might want to change id in main.html
-	var location = document.getElementById("email").value;
+	var description = document.getElementById("description").value; //might want to change id in main.html
+	var location = document.getElementById("location").value;
 	var when = document.getElementById("when").value;
 	var type = document.getElementById("type").value;
 	
