@@ -37,14 +37,14 @@ function readCookie()
 		{
 			userId = parseInt( tokens[1].trim() );
 		}
-		// else if( tokens[0] == "eventId" )
-		// {
-		// 	userId = parseInt( tokens[1].trim() );
-		// }
-		// else if( tokens[0] == "eventName" )
-		// {
-		// 	userId = parseInt( tokens[1].trim() );
-		// }
+		else if( tokens[0] == "eventId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+		else if( tokens[0] == "eventName" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
 	}
 	
 	if( userId < 0 )

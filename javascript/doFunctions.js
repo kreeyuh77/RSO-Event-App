@@ -167,7 +167,7 @@ function doFindEvents()
 	
 					for (var i = 0; i < numElements; i++)
 					{
-						for (var j = 0; j < 5; j++)
+						for (var j = 0; j < 6; j++)
 						{
 							if (j == 0)
 							{
@@ -188,6 +188,10 @@ function doFindEvents()
 							if (j == 4)
 							{
 								array[i][j] = jsonObject[i].Type;
+							}
+							if (j == 5)
+							{
+								arraySchool[i][j] = jsonObject[i].id;
 							}
 						}
 					}
@@ -224,7 +228,7 @@ function createTable(array)
 	  {
 	  	table+= "<td>" + array[i][j] + "</td>";
 	  }
-	  //table +="<td style='word-wrap:break-word;'><span id='editContactButton' style='width:auto;height:30px;padding:10px' onclick='doGoToEventPage(" + i + ")';>MORE</span></td>";
+	  table +="<td style='word-wrap:break-word;'><span id='editContactButton' style='width:auto;height:30px;padding:10px' onclick='doGoToEventPage(" + i + ")';>MORE</span></td>";
 	  table+="</tr>";
 	}
 	table+="</table>";
@@ -383,16 +387,16 @@ function doApproval(i, val)
 	}
 }
 
-// function doGoToEventPage(i)
-// {
-// 	var eventID = array[i][5];
-// 	var eventName = array[i][0];
-// 	// update the cookie to store the eventID and name as well. 
-// 	document.cookie = "userId=" + userId + ",userName=" + userName + ",eventId" + eventID + ",eventName" + eventName + ";expires=" + date.toGMTString();
+function doGoToEventPage(i)
+{
+	var eventID = array[i][5];
+	var eventName = array[i][0];
+	// update the cookie to store the eventID and name as well. 
+	document.cookie = "userId=" + userId + ",userName=" + userName + ",eventId" + eventID + ",eventName" + eventName + ";expires=" + date.toGMTString();
 
-// 	// go to event page
-// 	location.href ="eventpage.html";
-// }
+	// go to event page
+	location.href ="eventpage.html";
+}
 
 
 function doAdd()
