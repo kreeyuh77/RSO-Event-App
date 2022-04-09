@@ -28,22 +28,36 @@
         if ("-1" == $row["RSOAdminID"]){
             returnWithError("Not an RSO Admin");
         } else {
-            $stmt = $conn->prepare("INSERT INTO Events (Name, Description, Location, Datetime, Type, Approved, RSOID, SchoolID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssss", $name, $des, $location, $time, $type, $approved, $rsoid, $schoolid);
+            $stmt = $conn->prepare("SELECT Datetime FROM Events WHERE Location = ?");
+            $stmt->bind_param("s", $location);
             $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
             $stmt->close();
 
-            $stmt = $conn->prepare("UPDATE Events SET SchoolID = (SELECT School FROM Student WHERE StudentID = ?) WHERE Name = ?");
-            $stmt->bind_param("ss", $id, $name);
-            $stmt->execute();
-            $stmt->close();
+            if($result->num_rows > 0){
+                returnWithError("Taken time slot at location");
+            } else {
+                $stmt = $conn->prepare("INSERT INTO Events (Name, Description, Location, Datetime, Type, Approved, RSOID, SchoolID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssssss", $name, $des, $location, $time, $type, $approved, $rsoid, $schoolid);
+                $stmt->execute();
+                $stmt->close();
 
-            if ($type == "RSO"){
-                $stmt = $conn->prepare("UPDATE Events SET RSOID = (SELECT RSOID FROM Student WHERE StudentID = ?) WHERE Name = ?");
+                $stmt = $conn->prepare("UPDATE Events SET SchoolID = (SELECT School FROM Student WHERE StudentID = ?) WHERE Name = ?");
                 $stmt->bind_param("ss", $id, $name);
                 $stmt->execute();
                 $stmt->close();
+
+                if ($type == "RSO"){
+                    $stmt = $conn->prepare("UPDATE Events SET RSOID = (SELECT RSOID FROM Student WHERE StudentID = ?) WHERE Name = ?");
+                    $stmt->bind_param("ss", $id, $name);
+                    $stmt->execute();
+                    $stmt->close();
+                }
+                $conn->close();
             }
-            $conn->close();
+
+
+            
         }
     }
