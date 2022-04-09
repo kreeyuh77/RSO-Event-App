@@ -21,8 +21,8 @@ function readCookie()
 {
 	userId = -1;
 	userName = "-1";
-	// eventId = -1;
-	// eventName = "-1";
+	eventId = -1;
+	eventName = "-1";
 	var data = document.cookie;
 	var splits = data.split(",");
 	for(var i = 0; i < splits.length; i++) 
