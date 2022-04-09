@@ -162,7 +162,7 @@ function doFindEvents()
 	
 					for (var i = 0; i < array.length; i++)
 					{
-						array[i] = new Array(5);
+						array[i] = new Array(6);
 					}
 	
 					for (var i = 0; i < numElements; i++)
