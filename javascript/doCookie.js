@@ -39,11 +39,11 @@ function readCookie()
 		}
 		else if( tokens[0] == "eventId" )
 		{
-			userId = parseInt( tokens[1].trim() );
+			eventId = parseInt( tokens[1].trim() );
 		}
 		else if( tokens[0] == "eventName" )
 		{
-			userId = parseInt( tokens[1].trim() );
+			eventName = parseInt( tokens[1].trim() );
 		}
 	}
 	
