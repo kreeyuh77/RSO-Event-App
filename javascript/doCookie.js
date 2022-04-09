@@ -43,7 +43,7 @@ function readCookie()
 		}
 		else if( tokens[0] == "eventName" )
 		{
-			eventName = parseInt( tokens[1].trim() );
+			eventName = tokens[1];
 		}
 	}
 	
