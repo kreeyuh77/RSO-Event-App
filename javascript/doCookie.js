@@ -53,6 +53,13 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("userName").innerHTML = "Logged in as " + userName;
+		if (document.getElementById("userName") != null)
+		{
+			document.getElementById("userName").innerHTML = "Logged in as " + userName;
+		}
+		else if (document.getElementById("eventName") != null)
+		{
+			document.getElementById("eventName").innerHTML = eventName;
+		}
 	}
 }
