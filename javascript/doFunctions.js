@@ -37,7 +37,6 @@ function doCreateEvent()
 	}	
 }
 
-
 function doCreateRSO()
 {
 	var RSOName = document.getElementById("RSOName").value;
@@ -116,89 +115,72 @@ function doSchoolDropdown()
 }
 
 
-// holds array of events returned for home page
 var array = '';
-var arraySchool = '';
-
-
 function doFindEvents()
 {
-		var jsonPayload = '';
-		// the list will be put here
-		var eventList = "";
-		var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
+	var jsonPayload = '';
+	var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
 	
-		//document.getElementById('eventResult').innerHTML = "";
+	//document.getElementById('eventResult').innerHTML = "";
 	
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-		
-		jsonPayload =  '{"ID" : "' + userId  + '"}';
-	  try
-	  {
-			console.log("This is the payload: " + jsonPayload);
-			xhr.send(jsonPayload);
-			xhr.onreadystatechange = function()
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	
+	jsonPayload =  '{"ID" : "' + userId  + '"}';
+	try
+	{
+		console.log("This is the payload: " + jsonPayload);
+		xhr.send(jsonPayload);
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
 			{
-				if (this.readyState == 4 && this.status == 200)
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log("This is the result: " + JSON.stringify(jsonObject));
+
+				var numElements = Object.keys(jsonObject).length;
+				array = new Array(numElements);
+
+				for (var i = 0; i < array.length; i++)
 				{
-					var jsonObject = JSON.parse(xhr.responseText);
-					console.log("This is the result: " + JSON.stringify(jsonObject));
-	
-					// if (jsonObject.error == "")
-					// {
-					// 	document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
-					// }
-					// else
-					// {
-					// 	document.getElementById("eventResult").innerHTML = jsonObject.error;
-					// 	document.getElementById("eventList").innerHTML = "";
-					// 	return;
-					// }
-					// console.log("about to create array");
-					var numElements = Object.keys(jsonObject).length;
-					array = new Array(numElements);
-	
-					for (var i = 0; i < array.length; i++)
+					array[i] = new Array(5);
+				}
+
+				for (var i = 0; i < numElements; i++)
+				{
+					for (var j = 0; j < 6; j++)
 					{
-						array[i] = new Array(5);
-					}
-	
-					for (var i = 0; i < numElements; i++)
-					{
-						for (var j = 0; j < 6; j++)
+						if (j == 0)
 						{
-							if (j == 0)
-							{
-								array[i][j] = jsonObject[i].Name;
-							}
-							if (j == 1)
-							{
-								array[i][j] = jsonObject[i].Description;
-							}
-							if (j == 2)
-							{
-								array[i][j] = jsonObject[i].Location;
-							}
-							if (j == 3)
-							{
-								array[i][j] = jsonObject[i].Datetime;
-							}
-							if (j == 4)
-							{
-								array[i][j] = jsonObject[i].Type;
-							}
-							if (j == 5)
-							{
-								array[i][j] = jsonObject[i].id;
-							}
+							array[i][j] = jsonObject[i].Name;
+						}
+						if (j == 1)
+						{
+							array[i][j] = jsonObject[i].Description;
+						}
+						if (j == 2)
+						{
+							array[i][j] = jsonObject[i].Location;
+						}
+						if (j == 3)
+						{
+							array[i][j] = jsonObject[i].Datetime;
+						}
+						if (j == 4)
+						{
+							array[i][j] = jsonObject[i].Type;
+						}
+						if (j == 5)
+						{
+							array[i][j] = jsonObject[i].id;
 						}
 					}
-					console.log(array);
-					createTable(array);
 				}
-			};
+				console.log(array);
+				createTable(array);
+			}
+		};
 	  }
 	  catch(err)
 	  {
@@ -211,7 +193,6 @@ function doFindEvents()
 
 function createTable(array)
 {
-	//var table = document.createElement('table');
 	// string to create table in html
 	var table = "<table><tr>";
 	table += "<th>" + "Title" + "</th>";
@@ -235,84 +216,74 @@ function createTable(array)
 	document.getElementById("eventList").innerHTML = table;
 }
 
+var arraySchool = '';
 function doFindEventsSchool()
 {
-		var jsonPayload = '';
-		// the list will be put here
-		var eventList = "";
-		var url = '../api/SchoolEventView.php'; // REPLACE WITH PROPER PHP 
+	var jsonPayload = '';
+	// the list will be put here
+	var eventList = "";
+	var url = '../api/SchoolEventView.php'; // REPLACE WITH PROPER PHP 
+
+	//document.getElementById('eventResult').innerHTML = "";
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	
-		//document.getElementById('eventResult').innerHTML = "";
-	
-		var xhr = new XMLHttpRequest();
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-		
-		jsonPayload =  '{"ID" : "' + userId  + '"}';
-	  try
-	  {
-			console.log("This is the payload: " + jsonPayload);
-			xhr.send(jsonPayload);
-			xhr.onreadystatechange = function()
+	jsonPayload =  '{"ID" : "' + userId  + '"}';
+	try
+	{
+		console.log("This is the payload: " + jsonPayload);
+		xhr.send(jsonPayload);
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
 			{
-				if (this.readyState == 4 && this.status == 200)
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log("This is the result: " + JSON.stringify(jsonObject));
+
+				var numElements = Object.keys(jsonObject).length;
+				arraySchool = new Array(numElements);
+
+				for (var i = 0; i < arraySchool.length; i++)
 				{
-					var jsonObject = JSON.parse(xhr.responseText);
-					console.log("This is the result: " + JSON.stringify(jsonObject));
-	
-					// if (jsonObject.error == "")
-					// {
-					// 	document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
-					// }
-					// else
-					// {
-					// 	document.getElementById("eventResult").innerHTML = jsonObject.error;
-					// 	document.getElementById("eventList").innerHTML = "";
-					// 	return;
-					// }
-					//console.log("about to create array");
-					var numElements = Object.keys(jsonObject).length;
-					arraySchool = new Array(numElements);
-	
-					for (var i = 0; i < arraySchool.length; i++)
+					arraySchool[i] = new Array(5);
+				}
+
+				for (var i = 0; i < numElements; i++)
+				{
+					for (var j = 0; j < 6; j++)
 					{
-						arraySchool[i] = new Array(5);
-					}
-	
-					for (var i = 0; i < numElements; i++)
-					{
-						for (var j = 0; j < 6; j++)
+						if (j == 0)
 						{
-							if (j == 0)
-							{
-								arraySchool[i][j] = jsonObject[i].Name;
-							}
-							if (j == 1)
-							{
-								arraySchool[i][j] = jsonObject[i].Description;
-							}
-							if (j == 2)
-							{
-								arraySchool[i][j] = jsonObject[i].Location;
-							}
-							if (j == 3)
-							{
-								arraySchool[i][j] = jsonObject[i].Datetime;
-							}
-							if (j == 4)
-							{
-								arraySchool[i][j] = jsonObject[i].Type;
-							}
-							if (j == 5)
-							{
-								arraySchool[i][j] = jsonObject[i].id;
-							}
+							arraySchool[i][j] = jsonObject[i].Name;
+						}
+						if (j == 1)
+						{
+							arraySchool[i][j] = jsonObject[i].Description;
+						}
+						if (j == 2)
+						{
+							arraySchool[i][j] = jsonObject[i].Location;
+						}
+						if (j == 3)
+						{
+							arraySchool[i][j] = jsonObject[i].Datetime;
+						}
+						if (j == 4)
+						{
+							arraySchool[i][j] = jsonObject[i].Type;
+						}
+						if (j == 5)
+						{
+							arraySchool[i][j] = jsonObject[i].id;
 						}
 					}
-					console.log(arraySchool);
-					createTableSchool(arraySchool);
 				}
-			};
+				console.log(arraySchool);
+				createTableSchool(arraySchool);
+			}
+		};
 	  }
 	  catch(err)
 	  {
@@ -320,9 +291,9 @@ function doFindEventsSchool()
 	  }
 }
 
+
 function createTableSchool(arraySchool)
 {
-	//var table = document.createElement('table');
 	// string to create table in html
 	var table = "<table><tr>";
 	table += "<th>" + "Title" + "</th>";
@@ -365,8 +336,8 @@ function doApproval(i, val)
 		{
 			if (this.readyState == 4 && this.status == 200)
 			{
-				//var jsonObject = JSON.parse(xhr.responseText);
-				//console.log("This is the result: " + JSON.stringify(jsonObject));
+				// var jsonObject = JSON.parse(xhr.responseText);
+				// console.log("This is the result: " + JSON.stringify(jsonObject));
 
 				// display success message
 				if (val == 0)
@@ -395,43 +366,97 @@ function doGoToEventPage(i)
 	var minutes = 20;
 	var date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "userId=" + userId + ",userName=" + userName + ",eventId" + eventID + ",eventName" + eventName + ";expires=" + date.toGMTString();
+	document.cookie = "userId=" + userId + ",userName=" + userName + ",eventId=" + eventID + ",eventName=" + eventName + ";expires=" + date.toGMTString();
 
 	// go to event page
 	location.href ="eventpage.html";
 }
 
-
-function doAdd()
-{
-	var title = document.getElementById("title").value;
-	var description = document.getElementById("description").value;
-	var location = document.getElementById("location").value;
-	var when = document.getElementById("when").value;
-	var state = document.getElementById("state").value;
-	var type = document.getElementById("type").value;
-	document.getElementById("addResult").innerHTML = "";
+var comments = '';
+function doFindComments() {
+	var jsonPayload = '';
+	var url = '../api/SOMETHING.php'; // REPLACE WITH PROPER PHP 
 	
-	var jsonPayload = '{"ID" : "' + userId + '","title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + '"}';
-	var url = '../api/AddEvent.php';
+	//document.getElementById('eventResult').innerHTML = "";
+	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		
+	jsonPayload =  '{"ID" : "' + eventID  + '"}';
 	try
 	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				document.getElementById("addResult").innerHTML = title + " " +  " has been added!";
-				updateTable(att, text);
-				
-			} 			
-		}		
+		console.log("This is the payload: " + jsonPayload);
 		xhr.send(jsonPayload);
-	}
-	catch(err)
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log("This is the result: " + JSON.stringify(jsonObject));
+
+				// if (jsonObject.error == "")
+				// {
+				// 	document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
+				// }
+				// else
+				// {
+				// 	document.getElementById("eventResult").innerHTML = jsonObject.error;
+				// 	document.getElementById("eventList").innerHTML = "";
+				// 	return;
+				// }
+				//console.log("about to create array");
+				var numElements = Object.keys(jsonObject).length;
+				comments = new Array(numElements);
+
+				for (var i = 0; i < comments.length; i++)
+				{
+					comments[i] = new Array(2);
+				}
+
+				for (var i = 0; i < numElements; i++)
+				{
+					for (var j = 0; j < 2; j++)
+					{
+						if (j == 0)
+						{
+							comments[i][j] = jsonObject[i].StudentID;
+						}
+						if (j == 1)
+						{
+							comments[i][j] = jsonObject[i].comment;
+						}
+					}
+				}
+				console.log(comments);
+				createTableComments(comments);
+			}
+		};
+	  }
+	  catch(err)
+	  {
+		document.getElementById("eventResult").innerHTML = err.message;
+	  }
+}
+
+function createTableComments(comments)
+{
+	//var table = document.createElement('table');
+	// string to create table in html
+	var table = "<table><tr>";
+	table += "<th>" + "Student" + "</th>";
+	table += "<th>" + "Comment" + "</th>";
+
+	for (var i = 0; i < arraySchool.length; i++)
 	{
-		document.getElementById("addResult").innerHTML = err.message;
+	  table+="<tr>";
+	  for (var j = 0; j < 52; j++)
+	  {
+		// can add if j = 3 that uses .toLocaleString, to format the date/time better
+	  	table+= "<td>" + comments[i][j] + "</td>";
+	  }
+	  table+="</tr>";
 	}
+	table+="</table>";
+	document.getElementById("eventList").innerHTML = table;
 }
