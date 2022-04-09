@@ -392,6 +392,7 @@ function doGoToEventPage(i)
 	var eventID = array[i][5];
 	var eventName = array[i][0];
 	// update the cookie to store the eventID and name as well. 
+	var minutes = 20;
 	var date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
 	document.cookie = "userId=" + userId + ",userName=" + userName + ",eventId" + eventID + ",eventName" + eventName + ";expires=" + date.toGMTString();
