@@ -162,7 +162,7 @@ function doFindEvents()
 	
 					for (var i = 0; i < array.length; i++)
 					{
-						array[i] = new Array(6);
+						array[i] = new Array(5);
 					}
 	
 					for (var i = 0; i < numElements; i++)
@@ -191,7 +191,7 @@ function doFindEvents()
 							}
 							if (j == 5)
 							{
-								arraySchool[i][j] = jsonObject[i].id;
+								array[i][j] = jsonObject[i].id;
 							}
 						}
 					}
