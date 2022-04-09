@@ -3,8 +3,8 @@ var extension = 'php';
 
 var userId = 0;
 var userName = "";
-// var eventId = 0;
-// var eventName = "";
+var eventId = 0;
+var eventName = "";
 
 
 function saveCookie()
