@@ -424,11 +424,12 @@ function doFindComments() {
 						}
 						if (j == 1)
 						{
-							comments[i][j] = jsonObject[i].comment;
+							comments[i][j] = jsonObject[i].Comment;
 						}
 					}
 				}
 				console.log(comments);
+				document.getElementById("eventResult").innerHTML = "";
 				createTableComments(comments);
 			}
 		};
@@ -447,7 +448,7 @@ function createTableComments(comments)
 	table += "<th>" + "Student" + "</th>";
 	table += "<th>" + "Comment" + "</th>";
 
-	for (var i = 0; i < arraySchool.length; i++)
+	for (var i = 0; i < comments.length; i++)
 	{
 	  table+="<tr>";
 	  for (var j = 0; j < 52; j++)
