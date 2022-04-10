@@ -461,3 +461,38 @@ function createTableComments(comments)
 	table+="</table>";
 	document.getElementById("eventList").innerHTML = table;
 }
+
+function doCreateComment()
+{
+	var comment = document.getElementById("comment").value;
+	
+	let xhr = new XMLHttpRequest();
+	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	var jsonPayload = '{"comment" : "' + comment + '", "eventId" : "' + eventId + '", "ID" : "' + userId +'"}';
+	xhr.send(jsonPayload);
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				if (jsonObject.error == "")
+				{
+					document.getElementById("createCommentResult").innerHTML = "Successfully created comment";
+				}
+				else
+				{
+					document.getElementById("createCommentResult").innerHTML = "Error creating comment";
+					return;
+				}
+			} 			
+		}		
+	}
+	catch(err)
+	{
+		document.getElementById("createCommentResult").innerHTML = err.message;
+	}	
+}

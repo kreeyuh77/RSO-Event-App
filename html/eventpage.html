@@ -51,50 +51,7 @@
 		</div>
 
 
-	<!--add box-->
-	<div id="addEvent" class="modal">
-			<!--this is the close X in the corner-->
-		<form class="modal-content animate">
-			<div class="imgcontainer">
-				<span onclick="document.getElementById('addEvent').style.display='none'" class="close" title="Close Modal">&times;</span>
-			</div>
-
-			 <!--input fields-->
-			<div class="container">
-				<h1>Create an Event</h1>
-	      <hr>
-				<label><b>Title</b></label>
-				<input type="text" id="title" placeholder="Enter Title" name="title" required>
-
-				<label><b>Description</b></label>
-				<input type="text" id="description" placeholder="Enter Description" name="description" required>
-
-				<label><b>Location</b></label>
-				<input type="text" id="location" placeholder="Enter Location" name="location">
-
-				<label><b>Date/Time</b></label>
-				<input type="datetime-local" id="when" name="when">
-
-				<label><b>Category</b></label>
-				<select name="type"  id="type" class= "dropBox" required>
-					<option disabled selected value>Select Category</option>
-					<option value="public">Public</option>
-					<option value="private">Private</option>
-					<option value="RSO">RSO Only</option>
-				</select>
-
-				<button type="reset" id="addEventButton" onclick="doCreateEvent();">Add Event</button>
-				<p align = "center" id = "addResult"></p>
-
-			</div>
-			 <!--close button-->
-			<div class="container" style="background-color:#f1f1f1">
-				<button type="button" onclick="document.getElementById('addEvent').style.display='none'" class="cancelbtn">Cancel</button>
-			</div>
-		</form>
-	</div>
-
-	<!--join box-->
+	<!--rate box-->
 	<div id="rateEvent" class="modal">
 			<!--this is the close X in the corner-->
 		<form class="modal-content animate">
@@ -107,7 +64,7 @@
 				<h1 >Rate Event</h1>
 				<p id='editName'></p>
 	      <hr>
-				<select name="RSO"  id="RSO" class= "dropBox" required>
+				<select name="rate"  id="rate" class= "dropBox" required>
 					<option disabled selected value>Select Rate</option>
 					<option value=1>1</option>
 					<option value=2>2</option>
@@ -116,7 +73,7 @@
 					<option value=5>5</option>
 				</select>
 				<p align = "center" id = "rateResult"></p>
-				<button type="reset" id="rateButton" onclick="doJoin()">Rate</button>
+				<button type="reset" id="rateButton" onclick="doRate()">Rate</button>
 
 			</div>
 			 <!--close button-->
@@ -126,7 +83,7 @@
 		</form>
 	</div>
 
-	<!--create RSO box-->
+	<!--create comment box-->
 	<div id="createComment" class="modal">
 		<!--this is the close X in the corner-->
 	<form class="modal-content animate">
@@ -185,8 +142,6 @@
 		document.getElementById('createCommentResult').innerHTML="";
 		document.getElementById('createComment').style.display='block'
 	}
-
-	
 
 	</script>
 	</body>
