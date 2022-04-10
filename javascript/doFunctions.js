@@ -1,7 +1,45 @@
+function doSchoolDropdown()
+{
+	// Lets create a function that reads from a json file
+	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
+	
+	// parse json file for a string
+	var url = '../api/SchoolDropdown.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
+
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	xhr.send(null);
+	xhr.onreadystatechange = function() {
+		// var jsonObject = JSON.parse(xhr.responseText);
+		if (this.readyState == 4 && this.status == 200)
+		{
+			var jsonObject = JSON.parse(xhr.responseText);
+			console.log("This is the result: " + JSON.stringify(jsonObject));
+			var schoolArray = new Array(Object.keys(jsonObject).length);
+			var schoolIDArray = new Array(Object.keys(jsonObject).length);
+			var select =  document.getElementById("school");
+			
+			
+			
+			for ( var i = 0 ; i < schoolArray.length ; i++)
+			{
+				schoolArray[i] = jsonObject[i].Name;
+				schoolIDArray[i] = jsonObject[i].SchoolID;
+				var choice = document.createElement("option");
+				choice.textContent = schoolArray[i];
+				choice.value = schoolIDArray[i];
+				select.appendChild(choice);
+			}	
+		}
+	}	
+}
+
 function doCreateEvent()
 {
 	var title = document.getElementById("title").value;
-	var description = document.getElementById("description").value; //might want to change id in main.html
+	var description = document.getElementById("description").value; 
 	var location = document.getElementById("location").value;
 	var when = document.getElementById("when").value;
 	var type = document.getElementById("type").value;
@@ -37,6 +75,7 @@ function doCreateEvent()
 					document.getElementById("addResult").innerHTML = "Error creating event";
 					return;
 				}
+			doFindEvents();
 			} 			
 		}		
 	}
@@ -81,47 +120,92 @@ function doCreateRSO()
 	}	
 }
 
-function doSchoolDropdown()
-{
-	// Lets create a function that reads from a json file
-	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
+// function doJoin()
+// {
+// 	var RSO = document.getElementById("RSO").value;
 	
-	// parse json file for a string
-	var url = '../api/SchoolDropdown.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
+// 	let xhr = new XMLHttpRequest();
+// 	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-Type", "application/json");
+// 	var jsonPayload = '{"RSO" : "' + RSO + '", "ID" : "' + userId + '"}';
+// 	xhr.send(jsonPayload);
+// 	try
+// 	{
+// 		xhr.onreadystatechange = function() 
+// 		{
+// 			if (this.readyState == 4 && this.status == 200) 
+// 			{
+// 				var jsonObject = JSON.parse(xhr.responseText);
+// 				if (jsonObject.error == "")
+// 				{
+// 					document.getElementById("joinResult").innerHTML = "Successfully joined RSO";
+// 				}
+// 				else
+// 				{
+// 					document.getElementById("joinResult").innerHTML = "Error joining RSO";
+// 					return;
+// 				}
+// 			} 			
+// 		}		
+// 	}
+// 	catch(err)
+// 	{
+// 		document.getElementById("joinResult").innerHTML = err.message;
+// 	}	
+// }
+
+
+
+// function doRSODropdown()
+// {
+// 	// Lets create a function that reads from a json file
+// 	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
+	
+// 	// parse json file for a string
+// 	var jsonPayload = '';
+// 	var url = '../api/PLACEHOLDER.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
 
 	
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	xhr.send(null);
-	xhr.onreadystatechange = function() {
-		// var jsonObject = JSON.parse(xhr.responseText);
-		if (this.readyState == 4 && this.status == 200)
-		{
-			var jsonObject = JSON.parse(xhr.responseText);
-			console.log("This is the result: " + JSON.stringify(jsonObject));
-			var schoolArray = new Array(Object.keys(jsonObject).length);
-			var schoolIDArray = new Array(Object.keys(jsonObject).length);
-			var select =  document.getElementById("school");
-			
-			// print to console 
-			//console.log("This is the school result: " + $result);
-			
-			
-			for ( var i = 0 ; i < schoolArray.length ; i++)
-			{
-				schoolArray[i] = jsonObject[i].Name;
-				schoolIDArray[i] = jsonObject[i].SchoolID;
-				var choice = document.createElement("option");
-				choice.textContent = schoolArray[i];
-				choice.value = schoolIDArray[i];
-				select.appendChild(choice);
-			}	
-		}
-			
-	}
-	
-}
+// 	var xhr = new XMLHttpRequest();
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+// 	jsonPayload =  '{"ID" : "' + userId  + '"}';
+// 	xhr.onreadystatechange = function() {
+// 	try
+// 	{
+// 		console.log("This is the payload: " + jsonPayload);
+// 		xhr.send(jsonPayload);
+// 		xhr.onreadystatechange = function()
+// 		{
+// 			// var jsonObject = JSON.parse(xhr.responseText);
+// 			if (this.readyState == 4 && this.status == 200)
+// 			{
+// 				var jsonObject = JSON.parse(xhr.responseText);
+// 				console.log("This is the result: " + JSON.stringify(jsonObject));
+// 				var RSOArray = new Array(Object.keys(jsonObject).length);
+// 				var RSOIDArray = new Array(Object.keys(jsonObject).length);
+// 				var select =  document.getElementById("RSO");
+				
+// 				for ( var i = 0 ; i < RSOArray.length ; i++)
+// 				{
+// 					RSOArray[i] = jsonObject[i].RSOName;
+// 					RSOIDArray[i] = jsonObject[i].RSOID;
+// 					var choice = document.createElement("option");
+// 					choice.textContent = RSOArray[i];
+// 					choice.value = RSOIDArray[i];
+// 					select.appendChild(choice);
+// 				}	
+// 			}
+// 		};
+// 	  }
+// 	  catch(err)
+// 	  {
+// 		document.getElementById("joinResult").innerHTML = err.message;
+// 	  }
+// 	}	
+// }
+
 
 
 var array = '';
@@ -129,8 +213,6 @@ function doFindEvents()
 {
 	var jsonPayload = '';
 	var url = '../api/StudentEventView.php'; // REPLACE WITH PROPER PHP 
-	
-	//document.getElementById('eventResult').innerHTML = "";
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -229,11 +311,7 @@ var arraySchool = '';
 function doFindEventsSchool()
 {
 	var jsonPayload = '';
-	// the list will be put here
-	var eventList = "";
 	var url = '../api/SchoolEventView.php'; // REPLACE WITH PROPER PHP 
-
-	//document.getElementById('eventResult').innerHTML = "";
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -386,8 +464,6 @@ function doFindComments() {
 	var jsonPayload = '';
 	var url = '../api/FindComments.php'; // REPLACE WITH PROPER PHP 
 	
-	//document.getElementById('eventResult').innerHTML = "";
-	
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -404,17 +480,6 @@ function doFindComments() {
 				var jsonObject = JSON.parse(xhr.responseText);
 				console.log("This is the result: " + JSON.stringify(jsonObject));
 
-				// if (jsonObject.error == "")
-				// {
-				// 	document.getElementById("eventResult").innerHTML = "Event(s) have been retrieved";
-				// }
-				// else
-				// {
-				// 	document.getElementById("eventResult").innerHTML = jsonObject.error;
-				// 	document.getElementById("eventList").innerHTML = "";
-				// 	return;
-				// }
-				//console.log("about to create array");
 				var numElements = Object.keys(jsonObject).length;
 				comments = new Array(numElements);
 
@@ -451,7 +516,6 @@ function doFindComments() {
 
 function createTableComments(comments)
 {
-	//var table = document.createElement('table');
 	// string to create table in html
 	var table = "<table><tr>";
 	table += "<th>" + "Student" + "</th>";
@@ -462,7 +526,6 @@ function createTableComments(comments)
 	  table+="<tr>";
 	  for (var j = 0; j < 2; j++)
 	  {
-		// can add if j = 3 that uses .toLocaleString, to format the date/time better
 	  	table+= "<td>" + comments[i][j] + "</td>";
 	  }
 	  table+="</tr>";
@@ -497,6 +560,7 @@ function doCreateComment()
 					document.getElementById("createCommentResult").innerHTML = "Error creating comment";
 					return;
 				}
+				doFindComments();
 			} 			
 		}		
 	}
@@ -532,6 +596,7 @@ function doCreateComment()
 // 					document.getElementById("rateResult").innerHTML = "Error rating event";
 // 					return;
 // 				}
+//				doFindRate();
 // 			} 			
 // 		}		
 // 	}
@@ -539,4 +604,32 @@ function doCreateComment()
 // 	{
 // 		document.getElementById("rateResult").innerHTML = err.message;
 // 	}	
+// }
+
+// function doFindRate() {
+// 	var jsonPayload = '';
+// 	var url = '../api/PLACEHOLDER.php'; // REPLACE WITH PROPER PHP 
+// 	var xhr = new XMLHttpRequest();
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		
+// 	jsonPayload =  '{"ID" : "' + eventId  + '"}';
+// 	try
+// 	{
+// 		console.log("This is the payload: " + jsonPayload);
+// 		xhr.send(jsonPayload);
+// 		xhr.onreadystatechange = function()
+// 		{
+// 			if (this.readyState == 4 && this.status == 200)
+// 			{
+// 				var jsonObject = JSON.parse(xhr.responseText);
+// 				console.log("This is the result: " + JSON.stringify(jsonObject));
+// 				document.getElementById("eventRating").innerHTML = "Event Rating" + JSON.stringify(jsonObject);
+// 			}
+// 		};
+// 	  }
+// 	  catch(err)
+// 	  {
+// 		document.getElementById("eventRating").innerHTML = err.message;
+// 	  }
 // }

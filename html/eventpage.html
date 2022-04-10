@@ -36,6 +36,7 @@
 	<div class="box" style="margin: 35px 35px 35px 35px; padding-left: 100px;padding-right: 100px; padding-bottom: 50px; padding-top: 50px">
 		<h2>University Events</h2>
 		<div align ="center" id = "eventName"></div><br>
+		<div align ="center" id = "eventRating"></div><br>
 			
 			<button type = "button" onclick="openComment();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;">Comment</button>
 			<button type = "button" onclick="openRate();" style="width:auto; margin:0 0 0 10px;padding: 17.5px 20px 17.5px 20px;float:left;	border-radius: 4 4px 4px 4;">Rate</button>
@@ -119,6 +120,10 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		doFindComments();
 	}, false);
+
+	// document.addEventListener('DOMContentLoaded', function() {
+	// 	doFindRate();
+	// }, false);
 
 	// Get the modal
 	var modal = document.getElementById('createComment');
