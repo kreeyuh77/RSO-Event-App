@@ -375,7 +375,7 @@ function doGoToEventPage(i)
 var comments = '';
 function doFindComments() {
 	var jsonPayload = '';
-	var url = '../api/SOMETHING.php'; // REPLACE WITH PROPER PHP 
+	var url = '../api/FindComments.php'; // REPLACE WITH PROPER PHP 
 	
 	//document.getElementById('eventResult').innerHTML = "";
 	
