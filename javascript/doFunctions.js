@@ -420,7 +420,7 @@ function doFindComments() {
 					{
 						if (j == 0)
 						{
-							comments[i][j] = jsonObject[i].StudentID;
+							comments[i][j] = jsonObject[i].StudentName;
 						}
 						if (j == 1)
 						{
