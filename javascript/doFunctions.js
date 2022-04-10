@@ -23,6 +23,15 @@ function doCreateEvent()
 				{
 					document.getElementById("addResult").innerHTML = "Successfully created event";
 				}
+				// TEST IF THIS WORKS
+				else if (jsonObject.error == "Not an RSO Admin")
+				{
+					document.getElementById("addResult").innerHTML = "You are not an RSO admin so you cannot create events. Create an RSO to access this function.";
+				}
+				else if (jsonObject.error == "Taken time slot at location")
+				{
+					document.getElementById("addResult").innerHTML = "Error creating event, conflicting time/location";
+				}
 				else
 				{
 					document.getElementById("addResult").innerHTML = "Error creating event";
@@ -496,3 +505,38 @@ function doCreateComment()
 		document.getElementById("createCommentResult").innerHTML = err.message;
 	}	
 }
+
+// function doRate()
+// {
+// 	var rate = document.getElementById("rate").value;
+	
+// 	let xhr = new XMLHttpRequest();
+// 	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+// 	xhr.open("POST", url, true);
+// 	xhr.setRequestHeader("Content-Type", "application/json");
+// 	var jsonPayload = '{"rate" : "' + rate + '", "eventId" : "' + eventId + '", "ID" : "' + userId +'"}';
+// 	xhr.send(jsonPayload);
+// 	try
+// 	{
+// 		xhr.onreadystatechange = function() 
+// 		{
+// 			if (this.readyState == 4 && this.status == 200) 
+// 			{
+// 				var jsonObject = JSON.parse(xhr.responseText);
+// 				if (jsonObject.error == "")
+// 				{
+// 					document.getElementById("rateResult").innerHTML = "Successfully rated event";
+// 				}
+// 				else
+// 				{
+// 					document.getElementById("rateResult").innerHTML = "Error rating event";
+// 					return;
+// 				}
+// 			} 			
+// 		}		
+// 	}
+// 	catch(err)
+// 	{
+// 		document.getElementById("rateResult").innerHTML = err.message;
+// 	}	
+// }
