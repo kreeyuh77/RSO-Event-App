@@ -451,7 +451,7 @@ function createTableComments(comments)
 	for (var i = 0; i < comments.length; i++)
 	{
 	  table+="<tr>";
-	  for (var j = 0; j < 52; j++)
+	  for (var j = 0; j < 2; j++)
 	  {
 		// can add if j = 3 that uses .toLocaleString, to format the date/time better
 	  	table+= "<td>" + comments[i][j] + "</td>";
