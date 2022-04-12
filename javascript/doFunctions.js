@@ -193,8 +193,8 @@ function doRSODropdown()
 				
 				for ( var i = 0 ; i < RSOArray.length ; i++)
 				{
-					RSOArray[i] = jsonObject[i].RSOName;
-					RSOIDArray[i] = jsonObject[i].RSOID;
+					RSOArray[i] = jsonObject[i].Name;
+					RSOIDArray[i] = jsonObject[i].id;
 					var choice = document.createElement("option");
 					choice.textContent = RSOArray[i];
 					choice.value = RSOIDArray[i];
