@@ -129,7 +129,7 @@ function doJoin()
 	var RSO = document.getElementById("RSO").value;
 	
 	let xhr = new XMLHttpRequest();
-	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+	let url = '../api/JoinRSO.php'; // CHANGE PHP NAME
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"RSO" : "' + RSO + '", "ID" : "' + userId + '"}';
@@ -168,7 +168,7 @@ function doRSODropdown()
 	
 	// parse json file for a string
 	var jsonPayload = '';
-	var url = '../api/PLACEHOLDER.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
+	var url = '../api/FindRSO.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
 
 	
 	var xhr = new XMLHttpRequest();
