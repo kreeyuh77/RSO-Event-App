@@ -570,66 +570,66 @@ function doCreateComment()
 	}	
 }
 
-// function doRate()
-// {
-// 	var rate = document.getElementById("rate").value;
+function doRate()
+{
+	var rate = document.getElementById("rate").value;
 	
-// 	let xhr = new XMLHttpRequest();
-// 	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
-// 	xhr.open("POST", url, true);
-// 	xhr.setRequestHeader("Content-Type", "application/json");
-// 	var jsonPayload = '{"rate" : "' + rate + '", "eventId" : "' + eventId + '", "ID" : "' + userId +'"}';
-// 	xhr.send(jsonPayload);
-// 	try
-// 	{
-// 		xhr.onreadystatechange = function() 
-// 		{
-// 			if (this.readyState == 4 && this.status == 200) 
-// 			{
-// 				var jsonObject = JSON.parse(xhr.responseText);
-// 				if (jsonObject.error == "")
-// 				{
-// 					document.getElementById("rateResult").innerHTML = "Successfully rated event";
-// 				}
-// 				else
-// 				{
-// 					document.getElementById("rateResult").innerHTML = "Error rating event";
-// 					return;
-// 				}
-//				doFindRate();
-// 			} 			
-// 		}		
-// 	}
-// 	catch(err)
-// 	{
-// 		document.getElementById("rateResult").innerHTML = err.message;
-// 	}	
-// }
+	let xhr = new XMLHttpRequest();
+	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	var jsonPayload = '{"rate" : "' + rate + '", "eventId" : "' + eventId + '", "ID" : "' + userId +'"}';
+	xhr.send(jsonPayload);
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				if (jsonObject.error == "")
+				{
+					document.getElementById("rateResult").innerHTML = "Successfully rated event";
+				}
+				else
+				{
+					document.getElementById("rateResult").innerHTML = "Error rating event";
+					return;
+				}
+				doFindRate();
+			} 			
+		}		
+	}
+	catch(err)
+	{
+		document.getElementById("rateResult").innerHTML = err.message;
+	}	
+}
 
-// function doFindRate() {
-// 	var jsonPayload = '';
-// 	var url = '../api/PLACEHOLDER.php'; // REPLACE WITH PROPER PHP 
-// 	var xhr = new XMLHttpRequest();
-// 	xhr.open("POST", url, true);
-// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+function doFindRate() {
+	var jsonPayload = '';
+	var url = '../api/PLACEHOLDER.php'; // REPLACE WITH PROPER PHP 
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 		
-// 	jsonPayload =  '{"ID" : "' + eventId  + '"}';
-// 	try
-// 	{
-// 		console.log("This is the payload: " + jsonPayload);
-// 		xhr.send(jsonPayload);
-// 		xhr.onreadystatechange = function()
-// 		{
-// 			if (this.readyState == 4 && this.status == 200)
-// 			{
-// 				var jsonObject = JSON.parse(xhr.responseText);
-// 				console.log("This is the result: " + JSON.stringify(jsonObject));
-// 				document.getElementById("eventRating").innerHTML = "Event Rating" + JSON.stringify(jsonObject);
-// 			}
-// 		};
-// 	  }
-// 	  catch(err)
-// 	  {
-// 		document.getElementById("eventRating").innerHTML = err.message;
-// 	  }
-// }
+	jsonPayload =  '{"ID" : "' + eventId  + '"}';
+	try
+	{
+		console.log("This is the payload: " + jsonPayload);
+		xhr.send(jsonPayload);
+		xhr.onreadystatechange = function()
+		{
+			if (this.readyState == 4 && this.status == 200)
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log("This is the result: " + JSON.stringify(jsonObject));
+				document.getElementById("eventRating").innerHTML = "Event Rating" + JSON.stringify(jsonObject);
+			}
+		};
+	  }
+	  catch(err)
+	  {
+		document.getElementById("eventRating").innerHTML = err.message;
+	  }
+}
