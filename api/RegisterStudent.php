@@ -22,7 +22,7 @@
         $row = $result->fetch_assoc();
         $stmt->close();
 
-        if ($email == $row["email"]){
+        if ($email == $row["School_Email"]){
             returnWithError("Email already exists");
         }
         else {
