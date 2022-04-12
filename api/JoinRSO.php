@@ -4,16 +4,15 @@
 
     $inData = getRequestInfo();
 
-    $rate = $inData["rate"];
-    $eventID = $inData["eventId"];
-    $userID = $inData["ID"];
+    $id = $inData["ID"];
+    $rsoid = $inData["RSO"];
 
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if ($conn->connect_error){
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("INSERT INTO Ratings (EventID, Rating) VALUES (?, ?)");
-        $stmt->bind_param("ss", $eventID, $rate);
+        $stmt = $conn->prepare("UPDATE Student SET RSOID = ? WHERE StudentID = ?");
+        $stmt->bind_param("ss", $rsoid, $id);
         $stmt->execute();
         $stmt->close();
         $conn->close();

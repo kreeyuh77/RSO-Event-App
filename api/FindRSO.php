@@ -4,13 +4,13 @@
 
     $inData = getRequestInfo();
 
-    $id = $inData['ID'];
+    $id = $inData["ID"];
 
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
     if ($conn->connect_error){
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("SELECT * FROM Comments WHERE EventID = ?");
+        $stmt = $conn->prepare("SELECT * FROM RSO WHERE SchoolID = (SELECT School FROM Student WHERE StudentID = ?)");
         $stmt->bind_param("s", $id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -22,4 +22,5 @@
         $stmt->close();
         $conn->close();
     }
+
 ?>
