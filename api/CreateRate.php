@@ -1,4 +1,4 @@
-<?
+<?php
     require_once 'DBH.php';
     require_once 'functions.php';
 
@@ -19,3 +19,4 @@
         $conn->close();
         returnWithError("");
     }
+?>
