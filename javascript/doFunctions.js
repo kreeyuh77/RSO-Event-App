@@ -120,91 +120,91 @@ function doCreateRSO()
 	}	
 }
 
-// function doJoin()
-// {
-// 	var RSO = document.getElementById("RSO").value;
+function doJoin()
+{
+	var RSO = document.getElementById("RSO").value;
 	
-// 	let xhr = new XMLHttpRequest();
-// 	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
-// 	xhr.open("POST", url, true);
-// 	xhr.setRequestHeader("Content-Type", "application/json");
-// 	var jsonPayload = '{"RSO" : "' + RSO + '", "ID" : "' + userId + '"}';
-// 	xhr.send(jsonPayload);
-// 	try
-// 	{
-// 		xhr.onreadystatechange = function() 
-// 		{
-// 			if (this.readyState == 4 && this.status == 200) 
-// 			{
-// 				var jsonObject = JSON.parse(xhr.responseText);
-// 				if (jsonObject.error == "")
-// 				{
-// 					document.getElementById("joinResult").innerHTML = "Successfully joined RSO";
-// 				}
-// 				else
-// 				{
-// 					document.getElementById("joinResult").innerHTML = "Error joining RSO";
-// 					return;
-// 				}
-// 			} 			
-// 		}		
-// 	}
-// 	catch(err)
-// 	{
-// 		document.getElementById("joinResult").innerHTML = err.message;
-// 	}	
-// }
+	let xhr = new XMLHttpRequest();
+	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	var jsonPayload = '{"RSO" : "' + RSO + '", "ID" : "' + userId + '"}';
+	xhr.send(jsonPayload);
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				if (jsonObject.error == "")
+				{
+					document.getElementById("joinResult").innerHTML = "Successfully joined RSO";
+				}
+				else
+				{
+					document.getElementById("joinResult").innerHTML = "Error joining RSO";
+					return;
+				}
+			} 			
+		}		
+	}
+	catch(err)
+	{
+		document.getElementById("joinResult").innerHTML = err.message;
+	}	
+}
 
 
 
-// function doRSODropdown()
-// {
-// 	// Lets create a function that reads from a json file
-// 	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
+function doRSODropdown()
+{
+	// Lets create a function that reads from a json file
+	// https://stackoverflow.com/questions/9991805/javascript-how-to-parse-json-array
 	
-// 	// parse json file for a string
-// 	var jsonPayload = '';
-// 	var url = '../api/PLACEHOLDER.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
+	// parse json file for a string
+	var jsonPayload = '';
+	var url = '../api/PLACEHOLDER.php'; // THIS WILL REPLACE WITH THE API JULIAN MAKES
 
 	
-// 	var xhr = new XMLHttpRequest();
-// 	xhr.open("POST", url, true);
-// 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-// 	jsonPayload =  '{"ID" : "' + userId  + '"}';
-// 	xhr.onreadystatechange = function() {
-// 	try
-// 	{
-// 		console.log("This is the payload: " + jsonPayload);
-// 		xhr.send(jsonPayload);
-// 		xhr.onreadystatechange = function()
-// 		{
-// 			// var jsonObject = JSON.parse(xhr.responseText);
-// 			if (this.readyState == 4 && this.status == 200)
-// 			{
-// 				var jsonObject = JSON.parse(xhr.responseText);
-// 				console.log("This is the result: " + JSON.stringify(jsonObject));
-// 				var RSOArray = new Array(Object.keys(jsonObject).length);
-// 				var RSOIDArray = new Array(Object.keys(jsonObject).length);
-// 				var select =  document.getElementById("RSO");
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	jsonPayload =  '{"ID" : "' + userId  + '"}';
+	xhr.onreadystatechange = function() {
+	try
+	{
+		console.log("This is the payload: " + jsonPayload);
+		xhr.send(jsonPayload);
+		xhr.onreadystatechange = function()
+		{
+			// var jsonObject = JSON.parse(xhr.responseText);
+			if (this.readyState == 4 && this.status == 200)
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				console.log("This is the result: " + JSON.stringify(jsonObject));
+				var RSOArray = new Array(Object.keys(jsonObject).length);
+				var RSOIDArray = new Array(Object.keys(jsonObject).length);
+				var select =  document.getElementById("RSO");
 				
-// 				for ( var i = 0 ; i < RSOArray.length ; i++)
-// 				{
-// 					RSOArray[i] = jsonObject[i].RSOName;
-// 					RSOIDArray[i] = jsonObject[i].RSOID;
-// 					var choice = document.createElement("option");
-// 					choice.textContent = RSOArray[i];
-// 					choice.value = RSOIDArray[i];
-// 					select.appendChild(choice);
-// 				}	
-// 			}
-// 		};
-// 	  }
-// 	  catch(err)
-// 	  {
-// 		document.getElementById("joinResult").innerHTML = err.message;
-// 	  }
-// 	}	
-// }
+				for ( var i = 0 ; i < RSOArray.length ; i++)
+				{
+					RSOArray[i] = jsonObject[i].RSOName;
+					RSOIDArray[i] = jsonObject[i].RSOID;
+					var choice = document.createElement("option");
+					choice.textContent = RSOArray[i];
+					choice.value = RSOIDArray[i];
+					select.appendChild(choice);
+				}	
+			}
+		};
+	  }
+	  catch(err)
+	  {
+		document.getElementById("joinResult").innerHTML = err.message;
+	  }
+	}	
+}
 
 
 
