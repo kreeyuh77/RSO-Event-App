@@ -178,7 +178,7 @@ function doRSODropdown()
 	xhr.onreadystatechange = function() {
 	try
 	{
-		console.log("This is the payload: " + jsonPayload);
+		console.log("This is the payload for RSO dropdown: " + jsonPayload);
 		xhr.send(jsonPayload);
 		xhr.onreadystatechange = function()
 		{
@@ -186,7 +186,7 @@ function doRSODropdown()
 			if (this.readyState == 4 && this.status == 200)
 			{
 				var jsonObject = JSON.parse(xhr.responseText);
-				console.log("This is the result: " + JSON.stringify(jsonObject));
+				console.log("This is the result for RSO dropdown: " + JSON.stringify(jsonObject));
 				var RSOArray = new Array(Object.keys(jsonObject).length);
 				var RSOIDArray = new Array(Object.keys(jsonObject).length);
 				var select =  document.getElementById("RSO");
