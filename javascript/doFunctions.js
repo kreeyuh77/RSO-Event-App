@@ -70,6 +70,10 @@ function doCreateEvent()
 				{
 					document.getElementById("addResult").innerHTML = "Error creating event, conflicting time/location";
 				}
+				else if (jsonObject.error == "Not enough members")
+				{
+					document.getElementById("addResult").innerHTML = "RSO must have 5 members to be active and create events";
+				}
 				else
 				{
 					document.getElementById("addResult").innerHTML = "Error creating event";
