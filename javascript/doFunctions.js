@@ -628,7 +628,7 @@ function doFindRate() {
 			{
 				var jsonObject = JSON.parse(xhr.responseText);
 				console.log("This is the result: " + JSON.stringify(jsonObject));
-				document.getElementById("eventRating").innerHTML = "Event Rating" + JSON.stringify(jsonObject);
+				document.getElementById("eventRating").innerHTML = "Event Rating: " + JSON.stringify(jsonObject);
 			}
 		};
 	  }
