@@ -175,7 +175,7 @@ function doRSODropdown()
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 	jsonPayload =  '{"ID" : "' + userId  + '"}';
-	xhr.onreadystatechange = function() {
+	//xhr.onreadystatechange = function() {
 	try
 	{
 		console.log("This is the payload for RSO dropdown: " + jsonPayload);
@@ -207,7 +207,7 @@ function doRSODropdown()
 	  {
 		document.getElementById("joinResult").innerHTML = err.message;
 	  }
-	}	
+	//}	
 }
 
 
