@@ -15,6 +15,7 @@ function doSignup()
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"name" : "' + name + '", "school" : "' + school + '", "schoolEmail" : "' + email + '", "Password" : "' + hash + '"}';
 	xhr.send(jsonPayload);	
+	console.log(xhr.responseText);
 	
 }
 
