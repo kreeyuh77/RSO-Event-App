@@ -539,7 +539,7 @@ function doCreateComment()
 	var comment = document.getElementById("comment").value;
 	
 	let xhr = new XMLHttpRequest();
-	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+	let url = '../api/CreateComment.php'; // CHANGE PHP NAME
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"comment" : "' + comment + '", "eventId" : "' + eventId + '", "ID" : "' + userId +'"}';
