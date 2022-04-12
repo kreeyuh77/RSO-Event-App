@@ -579,7 +579,7 @@ function doRate()
 	var rate = document.getElementById("rate").value;
 	
 	let xhr = new XMLHttpRequest();
-	let url = '../api/PLACEHOLDER.php'; // CHANGE PHP NAME
+	let url = '../api/CreateRate.php'; // CHANGE PHP NAME
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"rate" : "' + rate + '", "eventId" : "' + eventId + '", "ID" : "' + userId +'"}';
@@ -612,7 +612,7 @@ function doRate()
 
 function doFindRate() {
 	var jsonPayload = '';
-	var url = '../api/PLACEHOLDER.php'; // REPLACE WITH PROPER PHP 
+	var url = '../api/FindRate.php'; // REPLACE WITH PROPER PHP 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
