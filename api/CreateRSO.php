@@ -6,6 +6,7 @@
 
     $id = $inData["ID"];
     $name = $inData["RSOName"];
+    $schoolID = "-1";
     
 
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dBName);
@@ -23,8 +24,16 @@
             returnWithError("Already Admin");
         }
         else {
-            $stmt = $conn->prepare("INSERT INTO RSO (Name) VALUES (?)");
-            $stmt->bind_param("s", $name);
+            $stmt = $conn->prepare("SELECT School from Student WHERE StudentID = ?");
+            $stmt->bind_param("s", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $stmt->close();
+            $schoolID = $row["School"];
+            
+            $stmt = $conn->prepare("INSERT INTO RSO (Name, SchoolID) VALUES (?, ?)");
+            $stmt->bind_param("ss", $name, $schoolID);
             $stmt->execute();
             $stmt->close();
             $stmt = $conn->prepare("UPDATE Student SET RSOAdminID = (SELECT id FROM RSO WHERE Name = ?) WHERE StudentID = ?");

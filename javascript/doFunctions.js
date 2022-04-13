@@ -105,6 +105,7 @@ function doCreateRSO()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
+				console.log(xhr.responseText);
 				var jsonObject = JSON.parse(xhr.responseText);
 				if (jsonObject.error == "")
 				{
