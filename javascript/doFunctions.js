@@ -40,7 +40,8 @@ function doCreateEvent()
 {
 	var title = document.getElementById("title").value;
 	var description = document.getElementById("description").value; 
-	var location = document.getElementById("location").value;
+	var longitude = document.getElementById("lng").value;
+	var latitude = document.getElementById("lat").value;
 	var when = document.getElementById("when").value;
 	var type = document.getElementById("type").value;
 	
@@ -48,7 +49,7 @@ function doCreateEvent()
 	let url = '../api/CreateEvent.php'; // CHANGE PHP NAME
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
-	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "location" : "' + location + '", "when" : "' + when + '", "type" : "' + type + '", "ID" : "' + userId +'"}';
+	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "longitude" : "' + longitude + '", "latitude" : "' + latitude + '", "when" : "' + when + '", "type" : "' + type + '", "ID" : "' + userId +'"}';
 	xhr.send(jsonPayload);
 	try
 	{

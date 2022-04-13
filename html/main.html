@@ -5,6 +5,10 @@
 		<script type="text/javascript" src="../javascript/doLogout.js"></script>
 		<script type="text/javascript" src="../javascript/doCookie.js"></script>
 		<script src="https://kit.fontawesome.com/5dfef646bd.js" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+		<script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+		<script src="../javascript/mapscript.js"></script>
 		<link rel="icon" href="../images/favicon.png">
 		<link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
 		
@@ -69,12 +73,6 @@
 				<label><b>Description</b></label>
 				<input type="text" id="description" placeholder="Enter Description" name="description" required>
 
-				<label><b>Location</b></label>
-				<input type="text" id="location" placeholder="Enter Location" name="location">
-
-				<label><b>Date/Time</b></label>
-				<input type="datetime-local" id="when" name="when">
-
 				<label><b>Category</b></label>
 				<select name="type"  id="type" class= "dropBox" required>
 					<option disabled selected value>Select Category</option>
@@ -82,6 +80,20 @@
 					<option value="private">Private</option>
 					<option value="RSO">RSO Only</option>
 				</select>
+
+				<label><b>Date/Time</b></label>
+				<input type="datetime-local" id="when" name="when">
+
+				<label><b>Location</b></label><br>
+				<!--<input type="text" id="location" style="width: 200px"/>-->
+				Lat <input type="text" id="lat" style="width: 200px"/>
+				Long: <input type="text" id="lng" style="width: 200px"/>
+				<div id="us2" style="width: 500px; height: 400px;"></div> 
+				<!--<input type="text" id="location" placeholder="Enter Location" name="location">-->
+
+			
+
+				
 
 				<button type="reset" id="addEventButton" onclick="doCreateEvent();">Add Event</button>
 				<p align = "center" id = "addResult"></p>
