@@ -7,7 +7,7 @@
     $name = $inData["title"];
     $des = $inData["description"];
     $longitude = $inData["longitude"];
-    $latitude = $indDate["latitude"];
+    $latitude = $inData["latitude"];
     $time = $inData["when"];
     $type = $inData["type"];
     $id = $inData["ID"];
@@ -65,6 +65,7 @@
                         $stmt->execute();
                         $stmt->close();
                     }
+                    returnWithError("");
                 }
 
                 
