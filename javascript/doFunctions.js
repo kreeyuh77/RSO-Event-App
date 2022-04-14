@@ -424,7 +424,7 @@ function createTableSchool(arraySchool)
 
 function doApproval(i, val)
 {
-	var eventID = arraySchool[i][5];
+	var eventID = arraySchool[i][6];
 	var eventName = arraySchool[i][0];
 	var jsonPayload = '';
 	var xhr = new XMLHttpRequest();
@@ -464,7 +464,7 @@ function doApproval(i, val)
 
 function doGoToEventPage(i)
 {
-	var eventID = array[i][5];
+	var eventID = array[i][6];
 	var eventName = array[i][0];
 	// update the cookie to store the eventID and name as well. 
 	var minutes = 20;
