@@ -241,12 +241,12 @@ function doFindEvents()
 
 				for (var i = 0; i < array.length; i++)
 				{
-					array[i] = new Array(6);
+					array[i] = new Array(7);
 				}
 
 				for (var i = 0; i < numElements; i++)
 				{
-					for (var j = 0; j < 6; j++)
+					for (var j = 0; j < 7; j++)
 					{
 						if (j == 0)
 						{
@@ -258,17 +258,21 @@ function doFindEvents()
 						}
 						if (j == 2)
 						{
-							array[i][j] = jsonObject[i].Location;
+							array[i][j] = jsonObject[i].Longitude;
 						}
 						if (j == 3)
 						{
-							array[i][j] = jsonObject[i].Datetime;
+							array[i][j] = jsonObject[i].Latitude;
 						}
 						if (j == 4)
 						{
-							array[i][j] = jsonObject[i].Type;
+							array[i][j] = jsonObject[i].Datetime;
 						}
 						if (j == 5)
+						{
+							array[i][j] = jsonObject[i].Type;
+						}
+						if (j == 6)
 						{
 							array[i][j] = jsonObject[i].id;
 						}
@@ -294,7 +298,8 @@ function createTable(array)
 	var table = "<table><tr>";
 	table += "<th>" + "Title" + "</th>";
 	table += "<th>" + "Description" + "</th>";
-	table += "<th>" + "Location" + "</th>";
+	table += "<th>" + "Longitiude" + "</th>";
+	table += "<th>" + "Latitude" + "</th>";
 	table += "<th>" + "When" + "</th>";
 	table += "<th>" + "Type" + "</th>";
 	table += "<th>" + "" + "</th>";
@@ -302,7 +307,7 @@ function createTable(array)
 	for (var i = 0; i < array.length; i++)
 	{
 	  table+="<tr>";
-	  for (var j = 0; j < 5; j++)
+	  for (var j = 0; j < 6; j++)
 	  {
 	  	table+= "<td>" + array[i][j] + "</td>";
 	  }
@@ -340,12 +345,12 @@ function doFindEventsSchool()
 
 				for (var i = 0; i < arraySchool.length; i++)
 				{
-					arraySchool[i] = new Array(6);
+					arraySchool[i] = new Array(7);
 				}
 
 				for (var i = 0; i < numElements; i++)
 				{
-					for (var j = 0; j < 6; j++)
+					for (var j = 0; j < 7 ; j++)
 					{
 						if (j == 0)
 						{
@@ -357,17 +362,21 @@ function doFindEventsSchool()
 						}
 						if (j == 2)
 						{
-							arraySchool[i][j] = jsonObject[i].Location;
+							arraySchool[i][j] = jsonObject[i].Longitude;
 						}
 						if (j == 3)
 						{
-							arraySchool[i][j] = jsonObject[i].Datetime;
+							arraySchool[i][j] = jsonObject[i].Latitude;
 						}
 						if (j == 4)
 						{
-							arraySchool[i][j] = jsonObject[i].Type;
+							arraySchool[i][j] = jsonObject[i].Datetime;
 						}
 						if (j == 5)
+						{
+							arraySchool[i][j] = jsonObject[i].Type;
+						}
+						if (j == 6)
 						{
 							arraySchool[i][j] = jsonObject[i].id;
 						}
@@ -391,7 +400,8 @@ function createTableSchool(arraySchool)
 	var table = "<table><tr>";
 	table += "<th>" + "Title" + "</th>";
 	table += "<th>" + "Description" + "</th>";
-	table += "<th>" + "Location" + "</th>";
+	table += "<th>" + "Longitude" + "</th>";
+	table += "<th>" + "Latitude" + "</th>";
 	table += "<th>" + "When" + "</th>";
 	table += "<th>" + "Type" + "</th>";
 	table += "<th>" + "" + "</th>";
