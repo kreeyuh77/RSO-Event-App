@@ -6,7 +6,8 @@
 
     $name = $inData["title"];
     $des = $inData["description"];
-    $location = $inData["location"];
+    $longitude = $inData["longitude"];
+    $latitude = $indDate["latitude"];
     $time = $inData["when"];
     $type = $inData["type"];
     $id = $inData["ID"];
@@ -28,8 +29,8 @@
         if ("-1" == $row["RSOAdminID"]){
             returnWithError("Not an RSO Admin");
         } else {
-            $stmt = $conn->prepare("SELECT Datetime FROM Events WHERE Location = ?");
-            $stmt->bind_param("s", $location);
+            $stmt = $conn->prepare("SELECT Datetime FROM Events WHERE Longitude = ? AND Latitude = ?");
+            $stmt->bind_param("ss", $longitude, $latitude);
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
@@ -48,8 +49,8 @@
                 if($result->num_rows < 5){
                     returnWithError("Not enough members");
                 } else {
-                    $stmt = $conn->prepare("INSERT INTO Events (Name, Description, Location, Datetime, Type, Approved, RSOID, SchoolID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("ssssssss", $name, $des, $location, $time, $type, $approved, $rsoid, $schoolid);
+                    $stmt = $conn->prepare("INSERT INTO Events (Name, Description, Longitude, Latitude, Datetime, Type, Approved, RSOID, SchoolID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssssssss", $name, $des, $longitude, $latitude, $time, $type, $approved, $rsoid, $schoolid);
                     $stmt->execute();
                     $stmt->close();
 
