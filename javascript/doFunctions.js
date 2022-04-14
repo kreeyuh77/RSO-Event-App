@@ -432,7 +432,7 @@ function doApproval(i, val)
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");	
 	jsonPayload =  '{"eventID" : "' + eventID + '", "ApprovalCode" : "' + val  + '"}';
-	console.log("This is the payload: " + jsonPayload);
+	console.log("This is the payload FOR APPROVAL: " + jsonPayload);
 	try 
 	{
 		xhr.send(jsonPayload);
