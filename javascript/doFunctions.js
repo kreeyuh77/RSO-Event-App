@@ -410,7 +410,7 @@ function createTableSchool(arraySchool)
 	for (var i = 0; i < arraySchool.length; i++)
 	{
 	  table+="<tr>";
-	  for (var j = 0; j < 5; j++)
+	  for (var j = 0; j < 6; j++)
 	  {
 		// can add if j = 3 that uses .toLocaleString, to format the date/time better
 	  	table+= "<td>" + arraySchool[i][j] + "</td>";
