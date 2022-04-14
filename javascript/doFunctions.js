@@ -50,6 +50,7 @@ function doCreateEvent()
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	var jsonPayload = '{"title" : "' + title + '", "description" : "' + description + '", "longitude" : "' + longitude + '", "latitude" : "' + latitude + '", "when" : "' + when + '", "type" : "' + type + '", "ID" : "' + userId +'"}';
+	console.log("This is the payload to create an event: " + jsonPayload);
 	xhr.send(jsonPayload);
 	try
 	{
