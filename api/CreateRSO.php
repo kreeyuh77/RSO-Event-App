@@ -13,17 +13,14 @@
     if ($conn->connect_error){
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("SELECT RSOAdminID FROM Student WHERE (StudentID = ?)");
+        $stmt = $conn->prepare("SELECT RSOAdminID FROM Student WHERE StudentID = ?");
         $stmt->bind_param("s", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $stmt->close();
 
-        if ("-1" != $row["RSOAdminID"]){
-            returnWithError("Already Admin");
-        }
-        else {
+        
             $stmt = $conn->prepare("SELECT School from Student WHERE StudentID = ?");
             $stmt->bind_param("s", $id);
             $stmt->execute();
@@ -46,6 +43,6 @@
             $stmt->close();
             $conn->close();
             returnWithError("");
-        }
+        
     }
 ?>
